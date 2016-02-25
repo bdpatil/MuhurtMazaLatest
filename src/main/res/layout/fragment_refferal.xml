@@ -1,0 +1,556 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorbg">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/lLayout_CircularImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgUserProfile_ProfileFragment"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/ic_usericon" />
+
+                <TextView
+                    android:id="@+id/txtUserName_ProfileFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtUserName_ProfileFragment"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="@string/user_name"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+
+            <!-- <View
+                 android:id="@+id/viewBelowUserCity"
+                 android:layout_width="wrap_content"
+                 android:layout_height="1dp"
+                 android:layout_marginLeft="25dp"
+                 android:layout_marginRight="25dp"
+                 android:background="@android:color/black" />-->
+            <!--First Cell-->
+            <LinearLayout
+                android:id="@+id/lLayout_whatsAppRefferalFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewBelowUserCity"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/imgWhatsappIcon_ProfileFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_action_whatsapp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true" />
+
+                <TextView
+                    android:id="@+id/txtWhatsappInfo_ReferralFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="8"
+                    android:background="@android:color/transparent"
+                    android:ems="8"
+                    android:text="@string/whatsapp_refferal"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/img_Next1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.7"
+                    android:background="@drawable/ic_action_rarrow" />
+            </LinearLayout>
+            <!--Second-->
+            <LinearLayout
+                android:id="@+id/lLayout_facebookRefferalFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewBelowUserCity"
+                android:layout_marginTop="2dp"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/imgfbIcon_ProfileFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_action_facebook"
+                    android:padding="5dp" />
+
+                <TextView
+                    android:id="@+id/txtfbInfo_ReferralFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="8"
+                    android:background="@android:color/transparent"
+                    android:ems="8"
+                    android:text="@string/facebook_refferal"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/img_Next2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.7"
+                    android:background="@drawable/ic_action_rarrow" />
+            </LinearLayout>
+            <!--Third-->
+            <LinearLayout
+                android:id="@+id/lLayout_twitterRefferalFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewBelowUserCity"
+                android:layout_marginTop="2dp"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/imgtwitterIcon_ProfileFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_action_tweeter"
+                    android:padding="5dp" />
+
+                <TextView
+                    android:id="@+id/txttwitterInfo_ReferralFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="8"
+                    android:background="@android:color/transparent"
+                    android:ems="8"
+                    android:text="@string/twitter_refferal"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/img_Next3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.7"
+                    android:background="@drawable/ic_action_rarrow" />
+            </LinearLayout>
+            <!--Fourth-->
+            <LinearLayout
+                android:id="@+id/lLayout_googleplusRefferalFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewBelowUserCity"
+                android:layout_marginTop="2dp"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/imggoogleplusIcon_ProfileFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_action_googleplus"
+                    android:padding="5dp" />
+
+                <TextView
+                    android:id="@+id/txtgoogleplusInfo_ReferralFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="8"
+                    android:background="@android:color/transparent"
+                    android:ems="8"
+                    android:text="@string/googleplus_refferal"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/img_Next4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.7"
+                    android:background="@drawable/ic_action_rarrow" />
+            </LinearLayout>
+            <!--Fifth-->
+            <LinearLayout
+                android:id="@+id/lLayout_emailRefferalFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewBelowUserCity"
+                android:layout_marginTop="2dp"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/imgEmailIcon_ProfileFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_action_email"
+                    android:padding="5dp" />
+
+                <TextView
+                    android:id="@+id/txtemailInfo_ReferralFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="8"
+                    android:background="@android:color/transparent"
+                    android:ems="8"
+                    android:text="@string/email_refferal"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/img_Next5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.7"
+                    android:background="@drawable/ic_action_rarrow" />
+            </LinearLayout>
+            <!--Sixth-->
+            <LinearLayout
+                android:id="@+id/lLayout_smsRefferalFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewBelowUserCity"
+                android:layout_marginTop="2dp"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:weightSum="10">
+
+                <ImageView
+                    android:id="@+id/imgSmsIcon_ProfileFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_action_msg"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:id="@+id/txtSmsInfo_ReferralFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="8"
+                    android:background="@android:color/transparent"
+                    android:ems="8"
+                    android:text="@string/sms_refferal"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/img_Next6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.7"
+                    android:background="@drawable/ic_action_rarrow" />
+            </LinearLayout>
+            <!-- <View
+                 android:id="@+id/viewBelowSms"
+                 android:layout_width="wrap_content"
+                 android:layout_height="1dp"
+                 android:layout_below="@+id/lLayout_SmsRefferalFragment"
+                 android:layout_marginLeft="25dp"
+                 android:layout_marginRight="25dp"
+                 android:background="@android:color/black" />-->
+
+            <!-- <LinearLayout
+                 android:id="@+id/lLayout_EmailRefferalFragment"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/viewBelowSms"
+                 android:layout_marginTop="2dp"
+                 android:orientation="horizontal"
+                 android:padding="5dp">
+
+                 <ImageView
+                     android:id="@+id/imgEmailIcon_RefferalFragment"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center|center_horizontal"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginStart="15dp"
+                     android:background="@drawable/fb"
+                     android:padding="5dp" />
+
+                 <TextView
+                     android:id="@+id/txtEmail_RefferalFragment"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_horizontal|center"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginStart="10dp"
+                     android:layout_weight="1"
+                     android:background="@android:color/transparent"
+                     android:ems="10"
+                     android:padding="10dp"
+                     android:text="@string/facebook_refferal"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+
+             &lt;!&ndash; <View
+                  android:id="@+id/viewBelowEmail"
+                  android:layout_width="wrap_content"
+                  android:layout_height="1dp"
+                  android:layout_below="@+id/lLayout_EmailRefferalFragment"
+                  android:layout_marginLeft="25dp"
+                  android:layout_marginRight="25dp"
+                  android:background="@android:color/black" />&ndash;&gt;
+
+             <LinearLayout
+                 android:id="@+id/lLayout_FacebookRefferalFragment"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/viewBelowEmail"
+                 android:layout_marginTop="2dp"
+                 android:background="@color/colorbg"
+                 android:orientation="horizontal"
+                 android:padding="5dp">
+
+                 <ImageView
+                     android:id="@+id/imgFacebook_RefferalFragment"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center|center_horizontal"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginStart="15dp"
+                     android:background="@drawable/twitter"
+                     android:padding="5dp" />
+
+                 <TextView
+                     android:id="@+id/txtFacebook_RefferalFragment"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_horizontal|center"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginStart="10dp"
+                     android:layout_weight="1"
+                     android:background="@android:color/transparent"
+                     android:ems="10"
+                     android:padding="10dp"
+                     android:text="@string/twitter_refferal"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+
+             &lt;!&ndash; <View
+                  android:id="@+id/viewBelowFacebook"
+                  android:layout_width="wrap_content"
+                  android:layout_height="1dp"
+                  android:layout_below="@+id/lLayout_FacebookRefferalFragment"
+                  android:layout_marginLeft="25dp"
+                  android:layout_marginRight="25dp"
+                  android:background="@android:color/black" />&ndash;&gt;
+
+             <LinearLayout
+                 android:id="@+id/lLayout_GoogleRefferalFragment"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/viewBelowFacebook"
+                 android:layout_marginTop="2dp"
+                 android:orientation="horizontal"
+                 android:padding="5dp">
+
+                 <ImageView
+                     android:id="@+id/imgGoogle_RefferalFragment"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center|center_horizontal"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginStart="15dp"
+                     android:background="@drawable/gplus"
+                     android:padding="5dp" />
+
+                 <TextView
+                     android:id="@+id/txtGoogle_RefferalFragment"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_horizontal|center"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginStart="10dp"
+                     android:layout_weight="1"
+                     android:background="@android:color/transparent"
+                     android:ems="10"
+                     android:padding="10dp"
+                     android:text="@string/googleplus_refferal"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+
+             &lt;!&ndash;<View
+                 android:id="@+id/viewBelowGoogle"
+                 android:layout_width="wrap_content"
+                 android:layout_height="1dp"
+                 android:layout_below="@+id/lLayout_GoogleRefferalFragment"
+                 android:layout_marginLeft="25dp"
+                 android:layout_marginRight="25dp"
+                 android:background="@android:color/black" />&ndash;&gt;
+
+             <LinearLayout
+                 android:id="@+id/lLayout_TwitterRefferalFragment"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/viewBelowFacebook"
+                 android:layout_marginTop="2dp"
+                 android:background="@color/colorbg"
+                 android:orientation="horizontal"
+                 android:padding="5dp">
+
+                 <ImageView
+                     android:id="@+id/imgLinkedIn_RefferalFragment"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center|center_horizontal"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginStart="15dp"
+                     android:background="@drawable/mail"
+                     android:padding="5dp" />
+
+                 <TextView
+                     android:id="@+id/txtLinkedIn_RefferalFragment"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_horizontal|center"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginStart="10dp"
+                     android:layout_weight="1"
+                     android:background="@android:color/transparent"
+                     android:ems="10"
+                     android:padding="10dp"
+                     android:text="@string/email_refferal"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+
+             &lt;!&ndash;  <View
+                   android:id="@+id/viewBelowLinkedIn"
+                   android:layout_width="wrap_content"
+                   android:layout_height="1dp"
+                   android:layout_below="@+id/lLayout_LinkedInRefferalFragment"
+                   android:layout_marginLeft="25dp"
+                   android:layout_marginRight="25dp"
+                   android:background="@android:color/black" />&ndash;&gt;
+
+             <LinearLayout
+                 android:id="@+id/lLayout_LinkedInRefferalFragment"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/viewBelowFacebook"
+                 android:layout_marginTop="2dp"
+                 android:orientation="horizontal"
+                 android:padding="5dp">
+
+                 <ImageView
+                     android:id="@+id/imgGooglePlus_RefferalFragment"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center|center_horizontal"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginStart="15dp"
+                     android:background="@drawable/msg"
+                     android:padding="5dp" />
+
+                 <TextView
+                     android:id="@+id/txtGooglePlus_RefferalFragment"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center_horizontal|center"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginStart="10dp"
+                     android:layout_weight="1"
+                     android:background="@android:color/transparent"
+                     android:ems="10"
+                     android:padding="10dp"
+                     android:text="@string/sms_refferal"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+ -->
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+
+    <item
+        android:id="@+id/city_name"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="Pune"
+        />
+    <item
+        android:id="@+id/action_city"
+        android:icon="@drawable/ic_city_search"
+        android:orderInCategory="100"
+        android:title="Pune"
+        android:visible="true"
+        app:showAsAction="always|withText"
+      />
+
+  <!--  <item
+        android:id="@+id/action_notify"
+        android:icon="@drawable/ic_menu_notifications"
+        android:orderInCategory="100"
+        android:title="Notification"
+        android:visible="false"
+        app:showAsAction="always" />-->
+
+    <!--<item
+        android:id="@+id/action_menu_one"
+        android:title="Menu item one"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_menu_two"
+        android:title="Menu item two"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_menu_three"
+        android:title="Menu item three"
+        android:visible="true"
+        app:showAsAction="never" />-->
+
+</menu>

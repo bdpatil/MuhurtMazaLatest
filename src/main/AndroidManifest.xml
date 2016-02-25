@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.muhurtmaza">
+
+    <!-- permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- Required to show current location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:name="android.support.multidex.MultiDexApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id_facebook" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".ui.LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name=".ui.SplashScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.TutorialActivity"
+            android:label="@string/title_activity_tutorial"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.SignUpActivity"
+            android:label="@string/title_activity_sign_up"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.EditProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.BookingDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.NotificationActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/app_id_google" />
+
+        <receiver android:name=".utility.SMSReceiver">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".ui.SearchActivity" />
+        <activity
+            android:name=".ui.PoojaDetailsActivity"
+            android:label="@string/title_activity_pooja_details"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".ui.MuhurtMazaPaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ConfirmationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.NewForgotPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.NewOTPActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.NewPoojaDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.NewPoojaBookingReviewDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.NewActivityPoojaBookingDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.NewBookPoojaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.NewReviewDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.ReportIssueActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.NewSearchCityActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.MainDrawerActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.NotificationsSettings"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.NewLoginActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".cropImage.MonitoredActivity"
+            android:screenOrientation="portrait"></activity>
+    </application>
+
+</manifest>

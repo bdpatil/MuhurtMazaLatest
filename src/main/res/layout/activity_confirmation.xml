@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:fitsSystemWindows="true"
+    tools:context="com.muhurtmaza.ui.ReviewDetailsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppBarOverlay">
+
+            <include layout="@layout/toolbar" />
+
+
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appbar"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:id="@+id/scrollView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical" android:layout_marginRight="@dimen/activity_horizontal_margin" android:layout_marginLeft="@dimen/activity_horizontal_margin">
+
+                    <com.muhurtmaza.ui.FontFitTextView
+                        android:id="@+id/txt_thankYouConfirmation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginTop="35dp"
+                        android:text="Making your puja experience blissful"
+                        android:textStyle="bold"
+                        android:textSize="22sp"
+                        android:textColor="@color/colorBlack"
+                        android:singleLine="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="You have successfully booked a puja"
+                        android:textColor="@color/colorGrey"
+                        android:layout_marginTop="12dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Booking Reference Number"
+                        android:textColor="@color/colorGrey"
+                        android:layout_marginTop="15dp"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txtBookingRefernceId_confirmation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="PUNYA1151124002"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginTop="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Confirmation email has been sent to"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="16sp"
+                        android:layout_marginTop="15sp" />
+
+                    <TextView
+                        android:id="@+id/txt_emailIdConfirmation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="abcd@gmail.com"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginTop="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+
+                        android:text="If you have any questions about your booking please"
+                        android:textColor="@color/colorGrey"
+                        android:layout_marginTop="15sp"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="contact us @"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16sp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp" />
+
+                        <TextView
+                            android:id="@+id/txt_cellNoConfirmation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="+91 90 21 251 501 or"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorBlack"
+                            android:layout_marginTop="5dp"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="email:"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/txt_emailMuhurtMazaConfirmation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="info.muhurtmaza.com"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_inviteFriendsForPoojaConfirmation"
+                        android:layout_width="match_parent"
+                        android:layout_height="75dp"
+                        android:background="@color/colorRedBtncolor"
+
+                        android:text="Invite Friends for this Puja"
+                        android:textSize="20sp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/colorRedBtnTxt"
+                        android:layout_marginTop="35dp" />
+
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

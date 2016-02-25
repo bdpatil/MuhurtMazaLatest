@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="176dp"
+    android:layout_alignParentBottom="true"
+    android:layout_margin="5dp"
+
+   >
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lost Item" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guruji not reach on time" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guruji did not explain Puja" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Did not get complete samagree" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnOk_reportIssue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/view"
+        android:layout_below="@+id/radioGroup"
+        android:layout_marginLeft="1dp"
+        android:background="@color/colorAccent"
+        android:text="Ok"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="2dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_centerInParent="true"
+        android:background="@color/colorWhite"></View>
+
+    <Button
+        android:id="@+id/btnCancel_reportIssue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/view"
+        android:layout_marginRight="1dp"
+        android:layout_below="@+id/radioGroup"
+        android:background="@color/colorAccent"
+        android:text="Cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite" />
+
+</RelativeLayout>

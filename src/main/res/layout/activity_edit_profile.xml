@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppBarOverlay">
+
+            <include layout="@layout/toolbar" />
+
+        </android.support.design.widget.AppBarLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_one"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_scroll">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rLayoutForImage_EditProfie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgUserProfile_EditProfile"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/ic_usericon"
+                        app:border_color="@color/colorAccent"
+                        app:border_width="2dp" />
+
+                    <ImageView
+                        android:id="@+id/imgCloud_EditProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/imgUserProfile_EditProfile"
+                        android:layout_alignEnd="@+id/imgUserProfile_EditProfile"
+                        android:layout_alignRight="@+id/imgUserProfile_EditProfile"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/ic_cloud" />
+                </RelativeLayout>
+
+                <!--firstName Layout-->
+                <LinearLayout
+                    android:id="@+id/lLayout_nameEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:weightSum="10">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_action_user"
+                        android:scaleType="center" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="9"
+                        android:theme="@style/EditText"
+
+                        >
+
+                        <EditText
+                            android:id="@+id/et_fnameEditProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+
+                            android:hint="Name"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/colorGrey" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <!--LastName Layout-->
+                <LinearLayout
+                    android:id="@+id/lLayout_lnameEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:weightSum="10">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_action_user" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="9"
+                        android:theme="@style/EditText">
+
+                        <EditText
+                            android:id="@+id/et_lnameEditProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="9"
+                            android:gravity="center_vertical"
+                            android:hint="Last Name"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/colorGrey"
+                            android:textColorHint="@color/colorBlack" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <!--Language Layout-->
+                <LinearLayout
+                    android:id="@+id/lLayout_languageEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:weightSum="10">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_action_language" />
+                 <!--   <Spinner
+                        android:id="@+id/et_languageEditProfile"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="9"
+                        android:gravity="center_vertical"
+
+                        />-->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="9"
+                        android:theme="@style/EditText">
+
+                        <EditText
+                            android:id="@+id/et_languageEditProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="9"
+                            android:gravity="center_vertical"
+                            android:hint="Language"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/colorGrey"
+                            android:textColorHint="@color/colorBlack" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <!--Email Layout-->
+                <LinearLayout
+                    android:id="@+id/lLayout_emailEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:weightSum="10">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_action_email" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="9"
+                        android:theme="@style/EditText">
+
+                        <EditText
+                            android:id="@+id/et_emailEditProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:hint="Email"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/colorGrey" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <!--Mobile Layout-->
+                <LinearLayout
+                    android:id="@+id/lLayout_mobileEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:weightSum="10">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_action_phone" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="9"
+                        android:theme="@style/EditText">
+
+                        <EditText
+                            android:id="@+id/et_mobileNoEditProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="9"
+                            android:gravity="center_vertical"
+                            android:hint="Mobile"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/colorGrey"
+                            android:textColorHint="@color/colorBlack" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <!--Address Layout-->
+                <LinearLayout
+                    android:id="@+id/lLayout_addressEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:weightSum="10">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_action_address" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="9"
+                        android:theme="@style/EditText">
+
+                        <EditText
+                            android:id="@+id/et_addressEditProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="9"
+                            android:gravity="center_vertical"
+                            android:hint="Address"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/colorGrey"
+                            android:textColorHint="@color/colorBlack" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <!--City-->
+                <LinearLayout
+                    android:id="@+id/lLayout_cityEditProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:weightSum="10">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_action_cityname1" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="9"
+                        android:theme="@style/EditText">
+
+                        <EditText
+                            android:id="@+id/et_cityEditProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="9"
+                            android:gravity="center_vertical"
+                            android:hint="City"
+                            android:inputType="textCapWords"
+                            android:textColor="@color/colorGrey"
+                            android:textColorHint="@color/colorBlack" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorTransparant" />
+            </LinearLayout>
+
+
+        </ScrollView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSave_EditProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent"
+        android:text="Save"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorWhite" />
+
+
+</RelativeLayout>

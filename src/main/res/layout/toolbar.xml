@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true"
+    android:minHeight="?attr/actionBarSize"
+    app:layout_scrollFlags="scroll|enterAlways|snap"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" android:layout_marginRight="12dp" android:weightSum="6">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_weight="0.5" android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="start"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/ic_white_arrow"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Back"
+                android:visibility="invisible" />
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" android:layout_weight="4" android:orientation="horizontal"
+        android:paddingLeft="10dp">
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="MuhurtMaza"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="@color/colorWhite"
+                android:layout_toLeftOf="@+id/txt_title1"
+                android:layout_toRightOf="@+id/img_back"
+                android:layout_toEndOf="@+id/img_back" android:layout_weight="4"
+                android:textAlignment="textStart"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+             android:layout_weight="1.5">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_edit"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="end"
+
+                android:background="@drawable/ic_share"
+                android:text="Cancel"
+                android:visibility="invisible"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="2dp" />
+            <TextView
+                android:id="@+id/txt_title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/img_edit"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Pune"
+                android:textColor="@color/colorWhite"
+                android:visibility="invisible"
+                android:textAlignment="viewEnd"
+                android:layout_centerVertical="true" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>
+
+
+
+
+

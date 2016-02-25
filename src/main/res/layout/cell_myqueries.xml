@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorbg"
+    android:orientation="vertical"
+
+    android:padding="4dp">
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        card_view:cardBackgroundColor="@color/queryCellBackground"
+        card_view:cardCornerRadius="0dp"
+        card_view:contentPadding="0dp">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="5.0">
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3.7">
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bottom_shaddow_ll"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <RelativeLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.4"></RelativeLayout>
+
+                    <RelativeLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.6"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false">
+
+                        <TextView
+                            android:id="@+id/user_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:text="How do I find Pandit"
+                            android:textColor="@color/colorBlack"></TextView>
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.3"
+                android:background="@color/windowBackground">
+
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <RelativeLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.4">
+
+                        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/profile_image"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="12px"
+                            android:src="@drawable/ic_usericon" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.6">
+
+                        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:weightSum="5.0">
+
+                            <RelativeLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.3">
+
+                                <TextView
+                                    android:id="@+id/call_details"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentTop="true"
+                                    android:ellipsize="end"
+                                    android:maxLines="4"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
+                                    android:paddingTop="8dp"
+                                    android:text="Dami text here, we need to fill"
+                                    android:textColor="@color/queryDetail"
+                                    android:textIsSelectable="false"
+                                    android:textSize="11sp" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3.7"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+
+                                    android:id="@+id/imageView2"
+                                    android:layout_width="18dp"
+                                    android:layout_height="fill_parent"
+
+                                    android:scaleType="fitCenter"
+                                    android:src="@drawable/ic_view" />
+
+                                <TextView
+                                    android:id="@+id/hourago"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+
+                                    android:layout_alignParentTop="true"
+                                    android:layout_toEndOf="@+id/imageView2"
+                                    android:layout_toRightOf="@+id/imageView2"
+                                    android:gravity="center_vertical"
+                                    android:text="1 hour ago"
+                                    android:textAlignment="gravity"
+                                    android:textColor="@color/colorGrey"
+                                    android:textSize="9sp" />
+
+                                <ImageView
+
+
+                                    android:id="@+id/imageView"
+                                    android:layout_width="18dp"
+
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginLeft="18dp"
+                                    android:layout_marginStart="18dp"
+                                    android:layout_toEndOf="@+id/hourago"
+                                    android:layout_toRightOf="@+id/hourago"
+                                    android:src="@drawable/ic_view" />
+
+                                <TextView
+                                    android:id="@+id/views"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+
+
+                                    android:layout_alignParentTop="true"
+                                    android:layout_toEndOf="@+id/imageView"
+                                    android:layout_toRightOf="@+id/imageView"
+                                    android:gravity="center_vertical"
+                                    android:text="10 "
+                                    android:textColor="@color/colorGrey"
+                                    android:textSize="9sp" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

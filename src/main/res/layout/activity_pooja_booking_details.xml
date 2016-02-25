@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorbg">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/anim_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </android.support.design.widget.AppBarLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/txtSpecialInstruction"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/layout_one"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingTop="15dp"
+            android:text="Please provide Pooja booking details"
+            android:textColor="#424242"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/txtSpecialInstruction"
+        android:layout_marginBottom="50dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/booking_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:paddingLeft="14dp"
+                android:paddingTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginRight="0dp"
+                        android:paddingTop="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_username" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText">
+
+                        <EditText
+                            android:id="@+id/et_fnameBookingDetailsActivity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autoText="false"
+                            android:hint="First Name"
+                            android:inputType="text"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:textColor="@color/colorGrey"
+
+                            android:textSize="15sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginRight="0dp"
+
+                        android:paddingTop="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_username" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText">
+
+                        <EditText
+                            android:id="@+id/et_lnameBookingDetailsActivity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Last Name"
+                            android:inputType="text"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="15sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginRight="0dp"
+                        android:paddingTop="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/language" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText">
+
+                        <!--<EditText
+                            android:id="@+id/et_languageBookingDetailsActivity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Language"
+                            android:inputType="text"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="15sp" />-->
+
+                        <Spinner
+                            android:id="@+id/et_languageBookingDetailsActivity"
+                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginTop="10dp"
+                            android:entries="@array/lang_list"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:prompt="@string/language_prompt"
+                            android:spinnerMode="dialog"
+                            android:textAlignment="viewStart"
+                            android:textSize="15sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginRight="0dp"
+
+                        android:paddingTop="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/mail" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText">
+
+                        <EditText
+                            android:id="@+id/et_emailBookingDetailsActivity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Email"
+                            android:inputType="text"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="15sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginRight="0dp"
+
+                        android:paddingTop="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/phoneg" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText">
+
+                        <EditText
+                            android:id="@+id/et_mobileNoBookingDetailsActivity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Mobile"
+                            android:inputType="text"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="15sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginRight="0dp"
+
+                        android:paddingTop="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/address" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText">
+
+                        <EditText
+                            android:id="@+id/et_addressBookingDetailsActivity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Address"
+                            android:inputType="text"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="15sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="0dp"
+                        android:layout_marginRight="0dp"
+
+                        android:paddingTop="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/city" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/EditText">
+
+                        <EditText
+                            android:id="@+id/et_cityBookingDetailsActivity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="City"
+                            android:inputType="text"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="15sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/muhurt_date_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/booking_details"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorWhite">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Muhurt Date"
+                        android:textColor="#424242"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="12">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3">
+
+                            <com.muhurtmaza.ui.FontFitTextView
+                                android:id="@+id/btn_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorTransparant"
+
+
+                                android:gravity="center_vertical|center_horizontal"
+
+                                android:padding="0dp"
+                                android:singleLine="true"
+                                android:text="13th"
+
+                                android:textColor="@color/colorBlack"
+                                android:textSize="40sp" />
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2.5"
+                            android:orientation="vertical"
+                            android:paddingLeft="10dp"
+                            android:weightSum="1">
+
+                            <com.muhurtmaza.ui.FontFitTextView
+                                android:id="@+id/txt_day"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:padding="0dp"
+                                android:singleLine="true"
+                                android:text="Tuesday"
+                                android:textColor="#424242"
+                                android:textSize="16sp" />
+
+                            <com.muhurtmaza.ui.FontFitTextView
+                                android:id="@+id/txt_month"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:padding="0dp"
+                                android:singleLine="true"
+                                android:text="March"
+                                android:textColor="#424242"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="6.5">
+
+                            <com.muhurtmaza.ui.FontFitTextView
+                                android:id="@+id/txt_date_day"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:singleLine="true"
+                                android:text="Today"
+                                android:gravity="end"
+                                android:textAlignment="viewEnd"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="40sp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/muhurt_date_view"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorWhite">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Samagree"
+                        android:textColor="#424242"
+                        android:textSize="20sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioGroup
+                                android:id="@+id/radGroup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_alignParentRight="true"
+
+                                android:orientation="horizontal">
+
+
+
+                                <RadioButton
+                                    android:id="@+id/radio_yes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:background="@android:color/transparent"
+                                    android:button="@android:color/transparent"
+                                    android:drawableTop="@drawable/radio_background"
+                                    android:gravity="center"
+                                    android:drawablePadding="5dp"
+                                    android:layout_weight="1"
+
+                                    android:text="Yes"
+                                    android:checked="false" />
+
+                                <View
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content" />
+
+                                <RadioButton
+                                    android:id="@+id/radio_no"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:background="@android:color/transparent"
+                                    android:button="@android:color/transparent"
+                                    android:drawableTop="@drawable/radio_background"
+                                    android:gravity="center"
+                                    android:checked="true"
+                                    android:drawablePadding="5dp"
+                                    android:layout_weight="1"
+                                    android:text="No"/>
+                            </RadioGroup>
+
+
+                        </LinearLayout>
+
+
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <!--  <LinearLayout
+      android:id="@+id/linear_layout_scroll"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/layout_one"
+      android:orientation="vertical">
+
+      <ScrollView
+      android:id="@+id/scrollView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/linear_layout_scroll">
+
+      <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorbg"
+      android:orientation="vertical">
+
+      <LinearLayout
+      android:id="@+id/layout_two"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/scrollView"
+      android:orientation="vertical">
+
+      <LinearLayout
+      android:id="@+id/txtSpecialInstruction"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:layout_marginBottom="5dp"
+      android:background="@color/colorWhite"
+      android:gravity="center"
+      android:orientation="vertical">
+
+      <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Please provide Pooja booking details"
+      android:textColor="#424242" />
+
+      </LinearLayout>
+
+
+      &lt;!&ndash;firstName Layout&ndash;&gt;
+      <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="5dp"
+      android:background="@color/colorWhite"
+      android:orientation="vertical">
+
+      <LinearLayout
+      android:id="@+id/lLayout_nameBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorWhite"
+      android:orientation="horizontal"
+      android:paddingLeft="10dp"
+      android:weightSum="10">
+
+      <ImageView
+      android:layout_width="0dp"
+      android:layout_height="30dp"
+      android:layout_gravity="center"
+      android:layout_weight="0.9"
+      android:background="@drawable/user" />
+
+      <android.support.design.widget.TextInputLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="15dp"
+      android:layout_weight="9.1"
+      android:theme="@style/EditText">
+
+      <EditText
+      android:id="@+id/et_fnameBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_vertical"
+      android:hint="Name"
+      android:inputType="textCapWords"
+      android:textColor="@color/colorGrey" />
+      </android.support.design.widget.TextInputLayout>
+      </LinearLayout>
+      &lt;!&ndash;LastName Layout&ndash;&gt;
+      <LinearLayout
+      android:id="@+id/lLayout_lnameBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorWhite"
+      android:orientation="horizontal"
+      android:paddingLeft="10dp"
+      android:weightSum="10">
+
+      <ImageView
+      android:layout_width="0dp"
+      android:layout_height="30dp"
+      android:layout_gravity="center"
+      android:layout_weight="0.9"
+      android:background="@drawable/user" />
+
+      <android.support.design.widget.TextInputLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="15dp"
+      android:layout_weight="9.1"
+      android:theme="@style/EditText">
+
+      <EditText
+      android:id="@+id/et_lnameBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="9"
+      android:gravity="center_vertical"
+      android:hint="Last Name"
+      android:inputType="textCapWords"
+      android:textColor="@color/colorGrey"
+      android:textColorHint="@color/colorBlack" />
+      </android.support.design.widget.TextInputLayout>
+      </LinearLayout>
+      &lt;!&ndash;Language Layout&ndash;&gt;
+      <LinearLayout
+      android:id="@+id/lLayout_languageBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="2dp"
+      android:background="@color/colorWhite"
+      android:orientation="horizontal"
+      android:paddingLeft="10dp"
+      android:weightSum="10">
+
+      <ImageView
+      android:layout_width="0dp"
+      android:layout_height="30dp"
+      android:layout_gravity="center"
+      android:layout_weight="0.9"
+      android:background="@drawable/language" />
+
+      <android.support.design.widget.TextInputLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="15dp"
+      android:layout_weight="9.1"
+      android:theme="@style/EditText">
+
+
+      <EditText
+      android:id="@+id/et_languageBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="9"
+      android:gravity="center_vertical"
+      android:hint="Language"
+      android:inputType="textCapWords"
+      android:paddingBottom="15dp"
+      android:textColor="@color/colorGrey"
+      android:textColorHint="@color/colorBlack" />
+      </android.support.design.widget.TextInputLayout>
+      </LinearLayout>
+      &lt;!&ndash;Email Layout&ndash;&gt;
+      <LinearLayout
+      android:id="@+id/lLayout_emailBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorWhite"
+      android:orientation="horizontal"
+      android:paddingLeft="10dp"
+      android:weightSum="10">
+
+      <ImageView
+      android:layout_width="0dp"
+      android:layout_height="30dp"
+      android:layout_gravity="center"
+      android:layout_weight="0.9"
+      android:background="@drawable/mail" />
+
+      <android.support.design.widget.TextInputLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="15dp"
+      android:layout_weight="9.1"
+      android:theme="@style/EditText">
+
+      <EditText
+      android:id="@+id/et_emailBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_vertical"
+      android:hint="Email"
+      android:inputType="textCapWords"
+      android:paddingBottom="15dp"
+      android:textColor="@color/colorGrey" />
+      </android.support.design.widget.TextInputLayout>
+      </LinearLayout>
+      &lt;!&ndash;Mobile Layout&ndash;&gt;
+      <LinearLayout
+      android:id="@+id/lLayout_mobileBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="2dp"
+      android:background="@color/colorWhite"
+      android:orientation="horizontal"
+      android:paddingLeft="10dp"
+      android:weightSum="10">
+
+      <ImageView
+      android:layout_width="0dp"
+      android:layout_height="30dp"
+      android:layout_gravity="center"
+      android:layout_weight="0.9"
+      android:background="@drawable/phoneg" />
+
+      <android.support.design.widget.TextInputLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="15dp"
+      android:layout_weight="9.1"
+      android:theme="@style/EditText">
+
+      <EditText
+      android:id="@+id/et_mobileNoBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="9"
+      android:gravity="center_vertical"
+      android:hint="Mobile"
+      android:inputType="phone"
+      android:paddingBottom="15dp"
+      android:textColor="@color/colorGrey"
+      android:textColorHint="@color/colorBlack" />
+      </android.support.design.widget.TextInputLayout>
+      </LinearLayout>
+      &lt;!&ndash;Address Layout&ndash;&gt;
+      <LinearLayout
+      android:id="@+id/lLayout_addressBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="2dp"
+      android:background="@color/colorWhite"
+      android:orientation="horizontal"
+      android:paddingLeft="10dp"
+      android:weightSum="10">
+
+      <ImageView
+      android:layout_width="0dp"
+      android:layout_height="30dp"
+      android:layout_gravity="center"
+      android:layout_weight="0.9"
+      android:background="@drawable/address" />
+
+      <android.support.design.widget.TextInputLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="15dp"
+      android:layout_weight="9.1"
+      android:theme="@style/EditText">
+
+      <EditText
+      android:id="@+id/et_addressBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="9"
+      android:gravity="center_vertical"
+      android:hint="Address"
+      android:inputType="textCapWords"
+      android:paddingBottom="15dp"
+      android:textColor="@color/colorGrey"
+      android:textColorHint="@color/colorBlack" />
+      </android.support.design.widget.TextInputLayout>
+      </LinearLayout>
+
+      &lt;!&ndash;City&ndash;&gt;
+      <LinearLayout
+      android:id="@+id/lLayout_cityBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="2dp"
+      android:background="@color/colorWhite"
+      android:orientation="horizontal"
+      android:paddingLeft="10dp"
+      android:weightSum="10">
+
+      <ImageView
+      android:layout_width="0dp"
+      android:layout_height="30dp"
+      android:layout_gravity="center"
+      android:layout_weight="0.9"
+      android:background="@drawable/city" />
+
+      <android.support.design.widget.TextInputLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="15dp"
+      android:layout_weight="9.1"
+      android:theme="@style/EditText">
+
+      <EditText
+      android:id="@+id/et_cityBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="9"
+      android:gravity="center_vertical"
+      android:hint="City"
+      android:inputType="textCapWords"
+      android:paddingBottom="15dp"
+      android:textColor="@color/colorGrey"
+      android:textColorHint="@color/colorBlack" />
+      </android.support.design.widget.TextInputLayout>
+
+      </LinearLayout>
+      </LinearLayout>
+
+      <LinearLayout
+      android:id="@+id/lLayout_MuhurtDate"
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:layout_marginBottom="5dp"
+      android:background="@color/colorWhite"
+      android:orientation="vertical"
+      android:paddingLeft="10dp">
+
+      <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Muhurt Date" />
+
+      <LinearLayout
+      android:id="@+id/lLayout_datePickerBookingDetailsActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorWhite"
+      android:orientation="horizontal"
+      android:weightSum="10">
+
+      <TextView
+      android:id="@+id/txt_dateBookingDetailsActivity"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="13th"
+      android:textSize="40sp"
+      android:layout_weight="2.7"/>
+
+      <LinearLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:background="@color/colorWhite"
+      android:orientation="vertical"
+      android:gravity="center_vertical"
+      android:paddingTop="10dp"
+      android:layout_weight="3.7">
+
+      <TextView
+      android:id="@+id/txt_weekBookingDetailsActivity"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Tuesday"/>
+
+      <TextView
+      android:id="@+id/txt_monthBookingDetailsActivity"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="March"/>
+
+      </LinearLayout>
+
+      <TextView
+      android:id="@+id/txt_Day"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="Today"
+      android:textSize="40sp"
+      android:layout_weight="3.6"/>
+
+      </LinearLayout>
+      </LinearLayout>
+
+      <LinearLayout
+      android:id="@+id/lLayout_samagree"
+      android:layout_width="match_parent"
+      android:layout_height="80dp"
+      android:background="@color/colorWhite"
+      android:orientation="horizontal"
+      android:paddingLeft="10dp"
+      android:weightSum="6">
+
+      <TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="3"
+      android:text="Samagree" />
+
+      <RadioGroup
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="3"
+      android:checkedButton="@+id/first"
+      android:orientation="horizontal">
+
+
+      <RadioButton
+      android:id="@+id/txt_day"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:checked="true"
+      android:gravity="center"
+      android:text="Yes"
+      android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+      android:textSize="30sp" />
+
+      <RadioButton
+      android:id="@+id/txt_day_status"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="No"
+      android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+      android:textSize="30sp" />
+
+      </RadioGroup>
+
+      </LinearLayout>
+
+      <View
+      android:layout_width="match_parent"
+      android:layout_height="60dp"/>
+
+      </LinearLayout>
+
+      </LinearLayout>
+      </ScrollView>
+      </LinearLayout>-->
+
+    <Button
+        android:id="@+id/btnReview_BookingDetailsActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent"
+        android:text="Review"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/colorWhite" />
+
+
+</RelativeLayout>

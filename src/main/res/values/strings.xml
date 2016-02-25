@@ -1,0 +1,153 @@
+<resources>
+    <string name="app_name">MuhurtMaza</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_skip_login">Skip Login</string>
+    <string name="action_sign_up">Sign Up</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">Please enter valid information</string>
+    <string name="password_should_match">Password and Confirm Password should match</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions." </string>
+    <string name="title_activity_pooja_details">PoojaDetailsActivity</string>
+
+    <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
+    cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
+    bergkase cream cheese fromage frais cheesy feet port-salut airedale. St. agur blue cheese rubber
+    cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
+    the big cheese.</string>
+    <string name="checkin">Checkin</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_tutorial">TutorialActivity</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+
+    <!-- Login Activity -->
+    <string name="app_id_google">1021070970721</string>
+    <!--<string name="app_id_google">255450947922</string> original google + id -->
+    <string name="app_id_facebook">741263319340146</string>
+
+    <!-- Strings related to Profile -->
+    <string name="user_name">Username</string>
+    <string name="user_city">Pune</string>
+    <string name="user_email_id">User@gmail.com</string>
+    <string name="user_phone">0123456789</string>
+
+    <!-- Strings related to Edit Profile -->
+    <string name="name">Name</string>
+    <string name="city">City</string>
+    <string name="user_address">Address</string>
+    <string name="user_country">Country</string>
+    <string name="email_id">Email Id</string>
+    <string name="contact">Contact</string>
+    <string name="save">Save</string>
+
+    <!-- Strings related to Booking Details -->
+    <string name="pooja_name">Pooja Name</string>
+    <string name="ref_no">Ref No</string>
+    <string name="ref_id">PUNFM01</string>
+    <string name="date">Date</string>
+    <string name="address">Address</string>
+    <string name="guruji">Guruji</string>
+    <string name="duration">Duration</string>
+    <string name="samagree">Samagree</string>
+    <string name="guruji_no">1</string>
+    <string name="duration_hrs">1hrs</string>
+    <string name="samagree_status">Yes</string>
+    <string name="dakshina">Dakshina</string>
+    <string name="dakshina_cost">1200INR</string>
+    <string name="report_issue">Report Issue</string>
+    <string name="mail_invoice">Mail Invoice</string>
+
+    <!-- Strings related to Confirmation -->
+    <string name="thank_you">THANK YOU !</string>
+    <string name="booking_successful">You have completed your booking successfully</string>
+    <string name="booking_refernce_no">Booking Reference Number</string>
+    <string name="confirmation_email">Confirmation email has been sent to </string>
+    <string name="booking_queries">If you have any questions about your boooking please contact </string>
+    <string name="cell_no">9895467890</string>
+    <string name="cell">Cell:</string>
+    <string name="muma_email_id">muhurtmaza.com</string>
+    <string name="muma_email">Email Id:</string>
+    <string name="appreciation">We appreciate your business</string>
+
+    <!-- Strings related to Refferal -->
+    <string name="sms_refferal">SMS</string>
+    <string name="email_refferal">Email</string>
+    <string name="facebook_refferal">Facebook</string>
+    <string name="googleplus_refferal">Google+</string>
+    <string name="linkedin_refferal">Linkedin</string>
+    <string name="twitter_refferal">Twitter</string>
+    <string name="whatsapp_refferal">WhatsApp</string>
+
+    <!-- Strings related to Ask Question -->
+    <string name="user_problem">What is your problem?</string>
+    <string name="que_desc">The Bhagwat Puran Anusthan focus on the devotion to the lord Vishnu or lord Krishna The Bhagwat Puran Anusthan focus on the devotion to the lord Vishnu or lord KrishnaThe Bhagwat Puran Anusthan focus on the devotion to the lord Vishnu or lord KrishnaThe Bhagwat Puran Anusthan focus on the devotion to the lord Vishnu or lord Krishna."</string>
+    <string name="que_desc1">The Bhagwat Puran Anusthan focus on the devotion to the lord Vishnu or lord Krishna The Bhagwat Puran Anusthan focus on the devotion to the lord Vishnu or lord Krishna"</string>
+    <string name="time">01:00</string>
+
+    <!-- Strings related to Tutorial -->
+    <string name="skip_string">Skip</string>
+    <string name="done_string">Done</string>
+
+    <!-- Written by Akshay-->
+    <!-- Pooja Details-->
+    <string name="state_prompt">Select State</string>
+    <string name="city_prompt">Select City</string>
+    <string name="language_prompt">Select Language</string>
+
+    <string-array name="state_list">
+        <item>Andaman and Nicobar Islands</item>
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chandigarh</item>
+        <item>Chhattisgarh</item>
+        <item>Dadra and Nagar Haveli</item>
+        <item>Daman and Diu</item>
+        <item>Delhi</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Lakshadweep</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Orissa</item>
+        <item>Pondicherry</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim</item>
+        <item>Tamil Nadu</item>
+        <item>Tripura</item>
+        <item>Uttaranchal</item>
+        <item>Uttar Pradesh</item>
+        <item>West Bengal</item>
+    </string-array>
+
+    <string-array name="lang_list">
+        <item>English</item>
+        <item>Marathi</item>
+        <item>Hindi</item>
+    </string-array>
+
+
+</resources>
