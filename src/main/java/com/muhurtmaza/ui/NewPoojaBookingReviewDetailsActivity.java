@@ -25,8 +25,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.muhurtmaza.R;
+import com.muhurtmaza.model.BookingDetails;
 import com.muhurtmaza.model.NewPoojaDetailModel;
 import com.muhurtmaza.model.PoojaDetailModel;
+import com.muhurtmaza.model.User;
 import com.muhurtmaza.utility.AppConstants;
 import com.muhurtmaza.utility.AppPreferences;
 import com.muhurtmaza.webservice.ApiConstants;
@@ -48,8 +50,7 @@ import java.util.GregorianCalendar;
 public class NewPoojaBookingReviewDetailsActivity extends ParentActivity implements View.OnClickListener , BaseHttpHelper.ResponseHelper{
 
     private Context context;
-    private ImageView imgMenu;
-    private TextView txtTitle;
+
     final static String POOJA_ID ="pooja_id";
     final static String POOJA_CITY ="pooja_city";
     Button paytoguruji, paynow;
@@ -60,12 +61,16 @@ public class NewPoojaBookingReviewDetailsActivity extends ParentActivity impleme
     String paymentMode = "";
     NewPoojaDetailModel poojaDetailModel;
     AppPreferences appPreferences;
+    User user;
+    BookingDetails details;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_details);
         context = this;
         appPreferences = AppPreferences.getInstance(NewPoojaBookingReviewDetailsActivity.this);
+        user = User.getInstance();
+        details = BookingDetails.getInstance();
         setupUI();
     }
 
@@ -73,20 +78,9 @@ public class NewPoojaBookingReviewDetailsActivity extends ParentActivity impleme
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        txtTitle = (TextView) toolbar.findViewById(R.id.txt_title);
-        imgMenu = (ImageView) toolbar.findViewById(R.id.img_back);
-        txtTitle.setText("Review Details");
-        //   mToolbar.setNavigationIcon(R.drawable.ic_share);
-        imgMenu.setBackgroundResource(R.drawable.ic_white_arrow);
-        imgMenu.setVisibility(View.VISIBLE);
-        txtTitle.setVisibility(View.VISIBLE);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("Review Details");
 
-        imgMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
 
         txt_fname = (TextView) findViewById(R.id.txt_fnameReviewDetails);
         txt_lname = (TextView) findViewById(R.id.txt_lnameReviewDetails);
@@ -129,6 +123,7 @@ public class NewPoojaBookingReviewDetailsActivity extends ParentActivity impleme
         txt_dakshina.setText("Dakshina: Rs."+sdakshina+"/-");
 
         poojaDetailModel= (NewPoojaDetailModel) getIntent().getSerializableExtra("poojaDetails");
+
         txt_poojaname.setText(poojaDetailModel.getmPooja_Name());
         txt_poojaduration.setText(getFormatedTime(poojaDetailModel.getmPooja_Duration()));
         txt_noofguruji.setText(poojaDetailModel.getmNo_Of_Guruji());
@@ -164,8 +159,19 @@ public class NewPoojaBookingReviewDetailsActivity extends ParentActivity impleme
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        imgMenu.setVisibility(View.INVISIBLE);
-        txtTitle.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private String getFormatedTime(String time) {
@@ -214,7 +220,7 @@ public class NewPoojaBookingReviewDetailsActivity extends ParentActivity impleme
 
         showLoadingDialog();
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("cust_id","24");
+        jsonObject.put("cust_id",user.getUserid());
         jsonObject.put("pooja_id", poojaId);
         jsonObject.put("current_date", new SimpleDateFormat("yyyy-MM-dd").format(date));
         jsonObject.put("current_time", new SimpleDateFormat("HH:mm:ss").format(date));
@@ -229,8 +235,9 @@ public class NewPoojaBookingReviewDetailsActivity extends ParentActivity impleme
         jsonObject.put("contact_no", smobile);
         jsonObject.put("city", scity);
         jsonObject.put("method", paymentMode);
+        user.setUserBookedPoojaDate(smuhurtdate);
+        user.setUserBookedPoojaName(poojaDetailModel.getmPooja_Name());
 
-        System.out.println("data" + jsonObject);
         ApiHelper lPoojaListApi = new ApiHelper(ApiConstants.POST, ApiConstants.BOOK_POOJA_URL, jsonObject.toString(), this);
         lPoojaListApi.mApiID = ApiConstants.BOOK_POOJA_ID;
         lPoojaListApi.invokeAPI();
@@ -251,6 +258,8 @@ public class NewPoojaBookingReviewDetailsActivity extends ParentActivity impleme
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 i.putExtra(AppConstants.BOOK_POOJA_REFERENCE_NO, poojaBookResponse.getmReferenceNo());
                 i.putExtra(AppConstants.USER_EMAIL, semail);
+                details.setRefferanceNo(poojaBookResponse.getmReferenceNo());
+                details.setUser_email_id(semail);
                 startActivity(i);
                 finish();
 
@@ -260,6 +269,8 @@ public class NewPoojaBookingReviewDetailsActivity extends ParentActivity impleme
                 intent.putExtra(AppConstants.POOJA_BOOKING_ID,poojaBookResponse.getmBookingId());
                 intent.putExtra(AppConstants.COST_OF_POOJA, sdakshina);
                 intent.putExtra(AppConstants.CONTACT_NO_FOR_POOJA, smobile);
+                details.setRefferanceNo(poojaBookResponse.getmReferenceNo());
+                details.setUser_email_id(semail);
                 startActivity(intent);
                 finish();
             }

@@ -17,13 +17,8 @@
             android:layout_height="wrap_content"
             android:theme="@style/AppBarOverlay">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/anim_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            <include   android:id="@+id/toolbar" layout="@layout/toolbar" />
 
         </android.support.design.widget.AppBarLayout>
     </LinearLayout>
@@ -179,7 +174,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="start"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="0dp"
                             android:entries="@array/lang_list"
                             android:paddingBottom="10dp"
                             android:paddingTop="10dp"
@@ -216,7 +211,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Email"
-                            android:inputType="text"
+                            android:inputType="textEmailAddress"
                             android:paddingBottom="10dp"
                             android:paddingTop="10dp"
                             android:textColor="@color/colorGrey"
@@ -250,7 +245,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Mobile"
-                            android:inputType="text"
+                            android:inputType="phone"
                             android:paddingBottom="10dp"
                             android:paddingTop="10dp"
                             android:textColor="@color/colorGrey"

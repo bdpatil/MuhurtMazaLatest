@@ -35,26 +35,20 @@
                     android:id="@+id/backdrop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/pooja_image"
+                    android:src="@drawable/pooja_image"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
                     app:layout_collapseMode="parallax" />
-
-                <ImageView
-                    android:id="@+id/backdropTransparant"
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorBlackTransparant"
-                    android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:alpha="1.0"
+                    android:background="@drawable/gradient_layer" />
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar_pooja"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
 
 
                 <TextView

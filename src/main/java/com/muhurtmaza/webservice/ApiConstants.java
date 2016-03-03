@@ -5,9 +5,9 @@ package com.muhurtmaza.webservice;
  */
 public class ApiConstants {
 
-    //public static final String DOMAIN_URL= "http://52.26.134.135";
+    //public static final String DOMAIN_URL= "http://54.169.218.189";
     //public static final String DOMAIN_URL= "http://ec2-52-4-20-173.compute-1.amazonaws.com";
-      public static final String DOMAIN_URL= "http://192.168.0.127:8045"; //Local URL from Darshana
+    public static final String DOMAIN_URL= "http://192.168.0.127:8045"; //Local URL from Darshana
     //public static final String DOMAIN_URL= "http://192.168.0.127:8086"; //Local URL from Darshana 15 Dec 2015
    // public static final String DOMAIN_URL= "http://muhurtmaza.com";
     //public static final String DOMAIN_URL= "http://192.168.0.127:8000";

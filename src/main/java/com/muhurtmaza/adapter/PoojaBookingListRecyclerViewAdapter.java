@@ -67,7 +67,7 @@ public class PoojaBookingListRecyclerViewAdapter  extends RecyclerView.Adapter<P
         Glide.with(context)
                 .load(itemList.get(position).getImage())
                 .fitCenter()
-                .placeholder(R.drawable.pooja_img)
+                .placeholder(R.drawable.pooja_image)
                 .crossFade()
                 .into(holder.poojaImage);
         displayRating(itemList.get(position).getRating(),holder);
@@ -169,4 +169,15 @@ public class PoojaBookingListRecyclerViewAdapter  extends RecyclerView.Adapter<P
 
         return duration;
     }
+
+    public void clear()
+    {
+
+        for(int i = 0 ; i < itemList.size() ; i++)
+        {
+            itemList.clear();
+        }
+
+    }
+
 }

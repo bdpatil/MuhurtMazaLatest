@@ -53,6 +53,7 @@ public class FragmentPopularPooja extends  ParentFragment implements BaseHttpHel
             cityname="Pune";
         }
         try {
+            if(BaseHttpHelper.isNwConnected(mContext))
             getPoojaList();
         } catch (JSONException e) {
             e.printStackTrace();

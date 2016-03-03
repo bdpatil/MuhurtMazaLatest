@@ -13,6 +13,7 @@ import com.muhurtmaza.R;
 import com.muhurtmaza.adapter.RecyclerViewAdapter;
 import com.muhurtmaza.model.BookingInfoModel;
 import com.muhurtmaza.model.GetBookedPoojaModel;
+import com.muhurtmaza.model.User;
 import com.muhurtmaza.utility.AppConstants;
 import com.muhurtmaza.utility.AppPreferences;
 import com.muhurtmaza.webservice.ApiConstants;
@@ -33,6 +34,7 @@ public class AllBookedPoojaFragment
 
     private LinearLayoutManager layoutManager;
     RecyclerView recyclerView;
+    User user;
 
     @Nullable
     @Override
@@ -44,11 +46,11 @@ public class AllBookedPoojaFragment
         recyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(layoutManager);
         //recyclerView.setBackgroundColor(Color.WHITE);
-
+        user= User.getInstance();
         AppPreferences appPreferences = AppPreferences.getInstance(getActivity());
         String UserId = appPreferences.getString(AppConstants.USER_ID, "");
         showLoadingDialog();
-        ApiHelper lApi = new ApiHelper(ApiConstants.GET, ApiConstants.GET_ALL_BOOKINGS_URL + "40", "", this);
+        ApiHelper lApi = new ApiHelper(ApiConstants.GET, ApiConstants.GET_ALL_BOOKINGS_URL + user.getUserid(),"", this);
         lApi.mApiID = ApiConstants.GET_ALL_BOOKINGS_ID;
         lApi.invokeAPI();
 
@@ -64,12 +66,15 @@ public class AllBookedPoojaFragment
     @Override
     public void onSuccess(BaseResponse pResponse) {
         dismissLoadingDialog();
-
-        GetBookedPoojaResponse obj = (GetBookedPoojaResponse) pResponse;
-        List<GetBookedPoojaModel> rowListItem = obj.getmList();
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), rowListItem);
-        recyclerView.setAdapter(adapter);
-
+try {
+    GetBookedPoojaResponse obj = (GetBookedPoojaResponse) pResponse;
+    List<GetBookedPoojaModel> rowListItem = obj.getmList();
+    RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), rowListItem);
+    recyclerView.setAdapter(adapter);
+}
+catch (Exception e){
+        e.printStackTrace();
+}
         MMToast.getInstance().showLongToast("Booking list" + pResponse, getActivity());
     }
 

@@ -3,6 +3,7 @@ package com.muhurtmaza.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -10,8 +11,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,8 +26,11 @@ import android.widget.Toast;
 import com.muhurtmaza.R;
 import com.muhurtmaza.adapter.PoojaTypesAdapter;
 import com.muhurtmaza.adapter.ViewPagerAdapter;
+import com.muhurtmaza.model.User;
+import com.muhurtmaza.ui.NewPoojaDetailsActivity;
 import com.muhurtmaza.ui.NewSearchCityActivity;
 import com.muhurtmaza.ui.NotificationActivity;
+import com.muhurtmaza.ui.SearchActivity;
 import com.muhurtmaza.utility.AppConstants;
 import com.muhurtmaza.utility.AppPreferences;
 import com.muhurtmaza.utility.BadgeUtils;
@@ -43,6 +49,9 @@ public class NewPoojaBookingFragment extends ParentFragment{
     private Context mContext;
     private SearchView mSearchView;
     AppPreferences appPreferences;
+    User user;
+    private OnFragmentInteractionListener mListener;
+    private SearchView searchView;
 
     @Nullable
     @Override
@@ -56,7 +65,11 @@ public class NewPoojaBookingFragment extends ParentFragment{
     }
 
     private void setUI(View rview){
+        user = User.getInstance();
 
+        Toolbar mToolBar = (Toolbar) ((AppCompatActivity) getActivity()).findViewById(R.id.toolbar);
+        setHasOptionsMenu(true);
+        mToolBar.setTitle("Book Puja");
         final ViewPager viewPager = (ViewPager)rview.findViewById(R.id.new_pooja_bookings_viewpager);
         setupViewPager(viewPager);
 
@@ -71,14 +84,14 @@ public class NewPoojaBookingFragment extends ParentFragment{
 
                 switch (tab.getPosition()) {
                     case 0:
-                        showToast("All Pooja");
+
                         break;
                     case 1:
-                        showToast("Seasonal");
+
 
                         break;
                     case 2:
-                        showToast("Popular");
+
                         break;
                 }
             }
@@ -91,6 +104,26 @@ public class NewPoojaBookingFragment extends ParentFragment{
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+
+
+        searchView = (SearchView) rview.findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener( ) {
+            @Override
+            public boolean   onQueryTextChange( String newText ) {
+                if(!newText.equals("")) {
+                    Intent i = new Intent(mContext, SearchActivity.class);
+                    i.putExtra(AppConstants.SEARCH_QUERY, newText);
+                    startActivity(i);
+                }
+               return true;
+            }
+
+            @Override
+            public boolean   onQueryTextSubmit(String query) {
+
+                return true;
             }
         });
 
@@ -171,5 +204,26 @@ public class NewPoojaBookingFragment extends ParentFragment{
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
 
 }

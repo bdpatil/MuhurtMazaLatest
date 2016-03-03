@@ -160,8 +160,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
-                    android:inputType="textCapWords"
 
+                    android:inputType="textCapWords"
                     android:textColor="@color/colorGrey" />
             </android.support.design.widget.TextInputLayout>
             <!-- Phone Label -->
@@ -175,9 +175,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Mobile No"
-                    android:inputType="textCapWords"
-
-                    android:textColor="@color/colorGrey" />
+                    android:inputType="number"
+                    android:textColor="@color/colorGrey"
+                    android:maxLength="10" />
             </android.support.design.widget.TextInputLayout>
 
             <!--  Email Label -->

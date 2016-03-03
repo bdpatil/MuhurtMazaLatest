@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.res.Configuration;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +34,10 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -40,7 +47,9 @@ import com.google.android.gms.plus.People;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.plus.model.people.Person;
+import com.google.gson.Gson;
 import com.muhurtmaza.R;
+import com.muhurtmaza.model.User;
 import com.muhurtmaza.utility.AppConstants;
 import com.muhurtmaza.utility.AppPreferences;
 import com.muhurtmaza.utility.CommonUtility;
@@ -60,7 +69,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class SignUpActivity extends ParentActivity implements BaseHttpHelper.ResponseHelper, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, ResultCallback<People.LoadPeopleResult> {
+public class SignUpActivity extends ParentActivity implements BaseHttpHelper.ResponseHelper,ResultCallback<People.LoadPeopleResult>,GoogleApiClient.OnConnectionFailedListener {
     private AlertDialog alertDialog;
     private Context mContext;
     private String latitude, longitude;
@@ -75,29 +84,21 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
     @InjectView(R.id.btn_new_sign_up)
     Button btnSignUp;
 
-    Boolean isSocialSignOn=false;
+    Boolean isSocialSignOn = false;
 
     /*Linear vew of the fb and google plus*/
-    @InjectView(R.id.lLayout_SignupViaFacebook)
-    LinearLayout fb_signupLayout;
 
-    @InjectView(R.id.lLayout_SignupViaGooglePlus)
-    LinearLayout gp_signupLayout;
-
-    @InjectView(R.id.btn_facebook_sdk)
+    LinearLayout fb_signupLayout,gp_signupLayout;
     LoginButton btnFacebookSdk;
 
-    private ImageView imgMenu;
-    private TextView txtTitle;
     android.support.v7.widget.Toolbar mToolbar;
     private boolean isGLogingGoingOn = false;
 
     //Google login
-    private static final int RC_SIGN_IN = 0;
-    private boolean mIntentInProgress;
-    private boolean mSignInClicked;
-    public static GoogleApiClient mGoogleApiClient;
-    private ConnectionResult mConnectionResult;
+    GoogleSignInAccount acct;
+    GoogleApiClient mGoogleApiClient;
+    public static final int RC_SIGN_IN=101;
+    public static final String TAG="GoogleSignIn";
 
     //Facebook login
     private CallbackManager callbackManager;
@@ -119,25 +120,15 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
         FacebookSdk.sdkInitialize(SignUpActivity.this);
         setContentView(R.layout.activity_new_sign_up);
         ButterKnife.inject(this);
-        isSocialSignOn=false;
+        isSocialSignOn = false;
         mContext = SignUpActivity.this;
         getCurrentLocation();
 
         mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        txtTitle = (TextView) mToolbar.findViewById(R.id.txt_title);
-        imgMenu = (ImageView) mToolbar.findViewById(R.id.img_back);
-        txtTitle.setText("New User");
-        //   mToolbar.setNavigationIcon(R.drawable.ic_share);
-        imgMenu.setBackgroundResource(R.drawable.ic_close);
-        imgMenu.setVisibility(View.VISIBLE);
-        txtTitle.setVisibility(View.VISIBLE);
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(Plus.API, Plus.PlusOptions.builder().build())
-                .addScope(Plus.SCOPE_PLUS_LOGIN).build();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setTitle("New User");
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -146,19 +137,32 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
 
 
         isGoogleLoginValid = AppPreferences.getInstance(this).getBoolean("isGoogleLogin", false);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
 
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
         String logoutFrom = getIntent().getStringExtra(AppConstants.LOGOUT_FROM);
+
+       /* String logoutFrom = getIntent().getStringExtra(AppConstants.LOGOUT_FROM);
         if (logoutFrom != null && !logoutFrom.equals(null) && !logoutFrom.equals("")) {
             if (logoutFrom.equals(AppConstants.GOOGLE_SIGN_UP)) {
                 isGoogleLoginValid = false;
-                logoutFromGoogle();
+                //logoutFromGoogle();
             }
-        }
+        }*/
         setupUI();
 
     }
 
+
     private void setupUI() {
+        fb_signupLayout= (LinearLayout) findViewById(R.id.lLayout_SignupViaFacebook);
+        gp_signupLayout= (LinearLayout) findViewById(R.id.lLayout_SignupViaGooglePlus);
+        btnFacebookSdk= (LoginButton) findViewById(R.id.btn_facebook_sdk);
         //Facebook initialization
         callbackManager = CallbackManager.Factory.create();
         // Initialize the SDK before executing any other operations,
@@ -187,7 +191,7 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
             public void onClick(View v) {
                 if (conDetect.checkConnectivity(mContext)) {
                     //MMToast.getInstance().showShortToast("facebook Button clicked", mContext);
-                    isSocialSignOn=true;
+                    isSocialSignOn = true;
                     loginWithFB();
                 } else {
                     Toast.makeText(mContext, AppConstants.CHECK_INTERNET_CONNECTION, Toast.LENGTH_LONG).show();
@@ -206,10 +210,8 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
                     if (conDetect.checkConnectivity(mContext)) {
 
                         if (checkPlayServices()) {
-                            if (!mGoogleApiClient.isConnecting()) {
-                                mSignInClicked = true;
-                                resolveSignInError();
-                            }
+                            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                            startActivityForResult(signInIntent, RC_SIGN_IN);
 
                         } else {
                             Toast.makeText(mContext, AppConstants.UPDATE_PLAY_SERVICES, Toast.LENGTH_LONG).show();
@@ -222,15 +224,7 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
             }
         });
 
-        imgMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent nextIntent = new Intent(SignUpActivity.this, TutorialActivity.class);
-                nextIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(nextIntent);
-                finish();
-            }
-        });
+
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,87 +232,168 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
                 btnSignUpClick();
             }
         });
+
+
+        edtName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                validateName();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        edtMobile.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                validateMobile();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        edtEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                validateEmail();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        edtPass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                validatePassword();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+    }
+
+    public void validate() {
+        if (validateName() && validateMobile() && validateEmail()) {
+            signup();
+        }
     }
 
     private void btnSignUpClick() {
-        isSocialSignOn=false;
-        String strName = edtName.getText().toString().trim();
-        String strEmail = edtEmail.getText().toString().trim();
-        String strPass = edtPass.getText().toString().trim();
-        String strMobile = edtMobile.getText().toString().trim();
+        isSocialSignOn = false;
+        validate();
+    }
 
-        // edtMobile.setRawInputType(Configuration.KEYBOARD_12KEY);
-        boolean cancel = false;
-        View focusView = null;
+    void signup() {
+        try {
+            showLoadingDialog();
 
-        edtName.setError(null);
-        edtEmail.setError(null);
-        edtPass.setError(null);
-        edtMobile.setError(null);
+            String strName = edtName.getText().toString().trim();
+            String strEmail = edtEmail.getText().toString().trim();
+            String strPass = edtPass.getText().toString().trim();
+            String strMobile = edtMobile.getText().toString().trim();
 
-        if (strName.isEmpty()) {
-            edtName.setError(getString(R.string.error_field_required));
-            focusView = edtName;
-            cancel = true;
-        }
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("email_id", strEmail);
+            jsonObject.put("first_name", strName);
+            jsonObject.put("phone", strMobile);
+            jsonObject.put("password", strPass);
+            jsonObject.put("sign_up_source", AppConstants.NEW_USER_SIGN_UP_SOURCE);
 
+            AppPreferences appPreferences = AppPreferences.getInstance(mContext);
 
-        if (strEmail.isEmpty()) {
-            edtEmail.setError(getString(R.string.error_field_required));
-            focusView = edtEmail;
-            cancel = true;
-        }
+            jsonObject.put("latitude", appPreferences.getString(AppConstants.LOC_LATITUDE, ""));
+            jsonObject.put("longitude", appPreferences.getString(AppConstants.LOC_LONGITUDE, ""));
 
 
-        if (strPass.isEmpty()) {
-            edtPass.setError(getString(R.string.error_field_required));
-            focusView = edtPass;
-            cancel = true;
-        }
-
-        int len = strPass.length();
-        if (len < 4) {
-            edtPass.setError("Password should be of 4-20 characters");
-            focusView = edtPass;
-            cancel = true;
-        }
-        int lenmb = strMobile.length();
-        if (lenmb < 10) {
-            edtMobile.setError("10 digit only");
-            focusView = edtMobile;
-            cancel = true;
-        }
+            ApiHelper lSignUpApi = new ApiHelper(ApiConstants.POST, ApiConstants.SIGN_UP_URL, jsonObject.toString(), this);
+            lSignUpApi.mApiID = ApiConstants.NEW_SIGN_UP_ID;
+            lSignUpApi.invokeAPI();
 
 
-        if (cancel) {
-            focusView.requestFocus();
-        } else {
-
-            try {
-                showLoadingDialog();
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("email_id", strEmail);
-                jsonObject.put("first_name", strName);
-                jsonObject.put("phone", strMobile);
-                jsonObject.put("password", strPass);
-                jsonObject.put("sign_up_source", AppConstants.NEW_USER_SIGN_UP_SOURCE);
-
-                AppPreferences appPreferences = AppPreferences.getInstance(mContext);
-
-                jsonObject.put("latitude", appPreferences.getString(AppConstants.LOC_LATITUDE, ""));
-                jsonObject.put("longitude", appPreferences.getString(AppConstants.LOC_LONGITUDE, ""));
-
-
-                ApiHelper lSignUpApi = new ApiHelper(ApiConstants.POST, ApiConstants.SIGN_UP_URL, jsonObject.toString(), this);
-                lSignUpApi.mApiID = ApiConstants.NEW_SIGN_UP_ID;
-                lSignUpApi.invokeAPI();
-
-
-            } catch (Exception em) {
-                em.printStackTrace();
-            }
+        } catch (Exception em) {
+            em.printStackTrace();
         }
     }
+
+    private boolean validateMobile() {
+        if (edtMobile.getText().toString().trim().matches("\\d{10}")) {
+            edtMobile.setError(null);
+            return true;
+        } else {
+            edtMobile.setError("Enter valid mobile no");
+            edtMobile.requestFocus();
+            return false;
+        }
+    }
+
+    private boolean validateEmail() {
+        if (CommonUtility.getInstance(this).isValidEmail(edtEmail.getText().toString())) {
+            edtEmail.setError(null);
+            return true;
+        } else {
+            edtEmail.setError("Enter valid email id");
+            edtEmail.requestFocus();
+            return false;
+        }
+    }
+
+    private boolean validatePassword() {
+        if (edtPass != null && edtPass.length() > 6) {
+            return true;
+        }
+        else {
+            edtPass.setError("Enter valid email id");
+            edtPass.requestFocus();
+            return false;
+        }
+    }
+
+    private boolean validateName() {
+        if (edtName.getText().toString().length() == 0) {
+            edtName.setError("Name is required");
+            edtName.requestFocus();
+            return false;
+        } else if (edtName.getText().toString().trim().matches("[a-zA-Z]*")) {
+            edtName.setError(null);
+            return true;
+        } else {
+            edtName.setError("Enter valid name");
+            edtName.requestFocus();
+            return false;
+        }
+    }
+
+/*    }*/
 
     @Override
     public void onSuccess(BaseResponse pResponse) {
@@ -326,13 +401,14 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
         dismissLoadingDialog();
         int apiId = pResponse.getmAPIType();
 
-        if (apiId == ApiConstants.NEW_SIGN_UP_ID )
-        {
+        if (apiId == ApiConstants.NEW_SIGN_UP_ID) {
             isGLogingGoingOn = false;
             NewUserResponse userProfile = (NewUserResponse) pResponse;
             String message = userProfile.getmMessage();
 
-            if (isSocialSignOn==true) {
+            if (message.equals("User Already Exist")) {
+                MMToast.getInstance().showLongToast(message, this);
+            } else if (isSocialSignOn == true) {
                 // MMToast.getInstance().showLongToast("Sign Up message=" + pResponse.toString(), this);
                 AppPreferences appPreferences = AppPreferences.getInstance(mContext);
 
@@ -345,12 +421,21 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
                 appPreferences.putString(AppConstants.SMS_ALERT, userProfile.getmSms_alert());
                 appPreferences.putString(AppConstants.EMAIL_ALERT, userProfile.getmEmail_alert());
                 appPreferences.putString(AppConstants.SIGN_UP_SOURCE, AppConstants.NEW_USER_SIGN_UP_SOURCE);
-
+                User user = User.getInstance();
+                user.setUserid(userProfile.getmUser_id());
+                user.setUserFirstname(userProfile.getmFirst_name());
+                user.setUserProfilePicURL(userProfile.getmUser_profile_image());
+                user.setUserEmailId(userProfile.getmEmail_id());
+                user.setUserContactNo(userProfile.getmPhone());
+                user.setUserAddress(userProfile.getmAddress());
+                user.setUserSMSAlert(userProfile.getmSms_alert());
+                user.setUserEmailAlert(userProfile.getmEmail_alert());
+                user.setUserSignUpSource(AppConstants.NEW_USER_SIGN_UP_SOURCE);
                 Intent intent = new Intent(this, MainDrawerActivity.class);
                 startActivity(intent);
                 this.finish();
 
-            } else if(isSocialSignOn==false) {
+            } else if (isSocialSignOn == false) {
 
                 AppPreferences appPreferences = AppPreferences.getInstance(mContext);
 
@@ -363,13 +448,21 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
                 appPreferences.putString(AppConstants.SMS_ALERT, userProfile.getmSms_alert());
                 appPreferences.putString(AppConstants.EMAIL_ALERT, userProfile.getmEmail_alert());
                 appPreferences.putString(AppConstants.SIGN_UP_SOURCE, AppConstants.NEW_USER_SIGN_UP_SOURCE);
-
+                User user = User.getInstance();
+                user.setUserid(userProfile.getmUser_id());
+                user.setUserFirstname(userProfile.getmFirst_name());
+                user.setUserProfilePicURL(userProfile.getmUser_profile_image());
+                user.setUserEmailId(userProfile.getmEmail_id());
+                user.setUserContactNo(userProfile.getmPhone());
+                user.setUserAddress(userProfile.getmAddress());
+                user.setUserSMSAlert(userProfile.getmSms_alert());
+                user.setUserEmailAlert(userProfile.getmEmail_alert());
+                user.setUserSignUpSource(AppConstants.NEW_USER_SIGN_UP_SOURCE);
                 Intent intent = new Intent(this, NewOTPActivity.class);
                 startActivity(intent);
                 this.finish();
 
-            }
-            else{
+            } else {
                 MMToast.getInstance().showLongToast(message, this);
             }
         }
@@ -378,8 +471,8 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
     private void loginWithFB() {
 
         //MMToast.getInstance().showShortToast("Login with clicked", mContext);
-        isSocialSignOn=true;
-        btnFacebookSdk.setReadPermissions("user_friends", "public_profile","email");
+        isSocialSignOn = true;
+        btnFacebookSdk.setReadPermissions("user_friends", "public_profile", "email");
         btnFacebookSdk.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
             @Override
@@ -467,6 +560,7 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
             public void onCancel() {
                 MMToast.getInstance().showLongToast("Cancel Response", mContext);
             }
+
             @Override
             public void onError(FacebookException exception) {
                 MMToast.getInstance().showLongToast("Exception Response=" + exception.toString(), mContext);
@@ -506,12 +600,24 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
 
         locationManager.fetchLocation();
     }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(mContext, TutorialActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
+                // app icon in action bar clicked; goto parent activity.
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        imgMenu.setVisibility(View.INVISIBLE);
-        txtTitle.setVisibility(View.INVISIBLE);
 
         accessTokenTracker.stopTracking();
         dismissLoadingDialog();
@@ -533,54 +639,11 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
         }
     }
 
-    @Override
-    public void onConnected(Bundle arg0) {
 
-        mSignInClicked = false;
-        Plus.PeopleApi.loadVisible(mGoogleApiClient, null).setResultCallback(this);
-        getGmailProfileInformation();
-    }
 
-    @Override
-    public void onConnectionSuspended(int i) {
-        if (isGoogleLoginValid) {
-            mGoogleApiClient.connect();
-        }
-    }
 
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-        if (!connectionResult.hasResolution()) {
-            GooglePlayServicesUtil.getErrorDialog(connectionResult.getErrorCode(), this, 0).show();
-            return;
-        }
 
-        if (!mIntentInProgress) {
-            // Store the ConnectionResult for later usage
-            mConnectionResult = connectionResult;
 
-            if (mSignInClicked) {
-                resolveSignInError();
-            }
-        }
-    }
-
-    private void resolveSignInError() {
-        if (mConnectionResult != null && mConnectionResult.hasResolution()) {
-            try {
-                mIntentInProgress = true;
-                mConnectionResult.startResolutionForResult(this, RC_SIGN_IN);
-            } catch (IntentSender.SendIntentException e) {
-                mIntentInProgress = false;
-                isGLogingGoingOn = false;
-                mGoogleApiClient.connect();
-            }
-        } else {
-            mIntentInProgress = false;
-            isGLogingGoingOn = false;
-            mGoogleApiClient.connect();
-        }
-    }
 
     protected boolean checkPlayServices() {
         final int resultCode = GooglePlayServicesUtil
@@ -632,17 +695,19 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
 
         if (requestCode == RC_SIGN_IN) {
 
-            if (responseCode == RESULT_OK) {
-                mSignInClicked = false;
-            }
-            mIntentInProgress = false;
-            if (!mGoogleApiClient.isConnecting()) {
-                countGoogleConnectAttempt = countGoogleConnectAttempt + 1;
-                if (countGoogleConnectAttempt < 2)
-                    mGoogleApiClient.connect();
-            }
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(intent);
+            handleSignInResult(result);
         } else {
             callbackManager.onActivityResult(requestCode, responseCode, intent);
+        }
+    }
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            acct = result.getSignInAccount();
+            getGmailProfileInformation();
+           /* MMToast.getInstance().showLongToast("Data"+"User name:"+acct.getDisplayName()+" Email="+acct.getEmail()
+                    +" Id="+acct.getId()+" Image Url="+acct.getPhotoUrl(),mContext);*/
         }
     }
 
@@ -651,55 +716,44 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
         getGmailProfileInformation();
     }
 
-    private void getGmailProfileInformation() {
+    private void getGmailProfileInformation() {   String personName = acct.getDisplayName();
+        Uri personPhotoUrl = acct.getPhotoUrl();
+        //personPhotoUrl = personPhotoUrl.substring(0, personPhotoUrl.length() - 2) + 200;
+        String email = acct.getEmail();
+        Log.d(TAG, "GPlus get g+ profile information");
         try {
-            if (!isGLogingGoingOn) {
-                isGLogingGoingOn = true;
-                if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
-                    Person currentPerson = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+            showLoadingDialog();
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("email", email);
+            jsonObject.put("phone", "");
+            jsonObject.put("first_name", personName);
+            jsonObject.put("user_profile_image", "");
+            jsonObject.put("sign_up_source", AppConstants.GOOGLE_SIGN_UP);
 
-                    String personName = currentPerson.getDisplayName();
-                    String personPhotoUrl = currentPerson.getImage().getUrl();
-                    //image clr code
-                    personPhotoUrl = personPhotoUrl.substring(0, personPhotoUrl.length() - 2) + 200;
-                    String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
-                    //	Log.d(TAG, "Gmail Photo url :-"+personPhotoUrl);
+            AppPreferences appPreferences = AppPreferences.getInstance(mContext);
 
-                    //new LoginUser().execute(personName,email,personPhotoUrl,"GOOGLE_ANDROID",""+latitude,""+longitude);
-                    // isGoogleLoginValid=AppPreferences.getInstance(this).getBoolean("isGoogleLogin",false);
-                    AppPreferences.getInstance(this).putBoolean("isGoogleLogin", true);
+            jsonObject.put("latitude", appPreferences.getString(AppConstants.LOC_LATITUDE, ""));
+            jsonObject.put("longitude", appPreferences.getString(AppConstants.LOC_LONGITUDE, ""));
 
-                    try {
-                        showLoadingDialog();
+            entrySource = AppConstants.GOOGLE_SIGN_UP;
 
-                        JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("email", email);
-                        jsonObject.put("phone", "");
-                        jsonObject.put("first_name", personName);
-                        jsonObject.put("user_profile_image", personPhotoUrl);
-                        jsonObject.put("sign_up_source", AppConstants.GOOGLE_SIGN_UP);
+            Log.d(TAG, "GPlus json=" + jsonObject.toString());
 
-                        AppPreferences appPreferences = AppPreferences.getInstance(mContext);
+            ApiHelper lSignUpApi = new ApiHelper(ApiConstants.POST, ApiConstants.SIGN_IN_GOOGLE_FACEBOOK, jsonObject.toString(), this);
+            lSignUpApi.mApiID = ApiConstants.NEW_SIGN_UP_ID;
+            lSignUpApi.invokeAPI();
 
-                        jsonObject.put("latitude", appPreferences.getString(AppConstants.LOC_LATITUDE, ""));
-                        jsonObject.put("longitude", appPreferences.getString(AppConstants.LOC_LONGITUDE, ""));
 
-                        entrySource = AppConstants.GOOGLE_SIGN_UP;
-
-                        ApiHelper lSignUpApi = new ApiHelper(ApiConstants.POST, ApiConstants.SIGN_IN_GOOGLE_FACEBOOK, jsonObject.toString(), this);
-                        lSignUpApi.mApiID = ApiConstants.SIGN_UP_ID;
-                        lSignUpApi.invokeAPI();
-
-                    } catch (Exception em) {
-                        em.printStackTrace();
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception em) {
+            em.printStackTrace();
         }
     }
-    public void logoutFromGoogle() {
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+  /*  public void logoutFromGoogle() {
         if (mGoogleApiClient.isConnected()) {
             Plus.AccountApi.clearDefaultAccount(NewLoginActivity.mGoogleApiClient);
             Plus.AccountApi.revokeAccessAndDisconnect(NewLoginActivity.mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
@@ -711,5 +765,5 @@ public class SignUpActivity extends ParentActivity implements BaseHttpHelper.Res
                 }
             });
         }
-    }
+    }*/
 }

@@ -52,7 +52,8 @@ public class FragmentSeasonalPooja extends ParentFragment implements BaseHttpHel
             cityname="Pune";
         }
         try {
-            getPoojaList();
+            if(BaseHttpHelper.isNwConnected(mContext))
+                getPoojaList();
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,8 +56,7 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
     //@InjectView(R.id.img_edit)ImageView imgEdit;
     private Context context;
     de.hdodenhof.circleimageview.CircleImageView imgUserProfile;
-    private ImageView imgMenu, imgEditBtnProfile;
-    private TextView txtTitle;
+    private ImageView  imgEditBtnProfile;
     android.support.v7.widget.Toolbar mToolbar;
     EditText etFirstName_EditProfile, etLastName_EditProfile, etLanguage_EditProfile, etEmail_EditProfile, etMobileNo_EditProfile, etAddress_EditProfile, etCity_EditProfile;
     Button btnSaveClick;
@@ -83,20 +83,9 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
         mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        txtTitle = (TextView) mToolbar.findViewById(R.id.txt_title);
-        imgMenu = (ImageView) mToolbar.findViewById(R.id.img_back);
-        txtTitle.setText("Edit Profile");
-        //   mToolbar.setNavigationIcon(R.drawable.ic_share);
-        imgMenu.setBackgroundResource(R.drawable.ic_white_arrow);
-        imgMenu.setVisibility(View.VISIBLE);
-        txtTitle.setVisibility(View.VISIBLE);
-
-        imgMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        mToolbar.setTitle("Edit Profile");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         imageLoader = MuhurtMazaApplication.getImageLoader(this);
@@ -237,7 +226,6 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
         String message = editProfResponce.getmMessage();
 
         if (message.equals("Profile Update successfully")) {
-
             AppPreferences appPreferences = AppPreferences.getInstance(mContext);
             appPreferences.putString(AppConstants.USER_ADDRESS, "" + editProfResponce.getmAddress());
             appPreferences.putString(AppConstants.USER_NUMBER, "" + editProfResponce.getmPhone());
@@ -421,7 +409,18 @@ public class EditProfileActivity extends ParentActivity implements View.OnClickL
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        imgMenu.setVisibility(View.INVISIBLE);
-        txtTitle.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

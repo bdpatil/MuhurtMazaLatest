@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Defines the menu item that will appear on the Action Bar in MainActivity -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.muhurtmaza.ui.NewPoojaDetailsActivity">
-
-    <item
-        android:id="@+id/action_city"
-        android:icon="@drawable/ic_share"
-        android:orderInCategory="100"
-        android:title="Share"
-        android:visible="true"
-        app:showAsAction="always|withText"
-        />
+xmlns:omgandroid="http://schemas.android.com/apk/res-auto">
+<!-- Share item -->
+<item
+    android:id="@+id/action_share"
+    android:title="Share"
+    android:icon="@drawable/ic_share"
+    omgandroid:showAsAction="always|withText"
+    omgandroid:actionProviderClass= "android.support.v7.widget.ShareActionProvider" />
 </menu>

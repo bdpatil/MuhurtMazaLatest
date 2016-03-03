@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -62,9 +64,13 @@ public class MuhurtMazaPaymentActivity extends ParentActivity {
         webView = (WebView) findViewById(R.id.webView_MuhurtMazaPayment);
         WebSettings settings = webView.getSettings();
         //settings.setDomStorageEnabled(true);
-        settings.setJavaScriptEnabled(true);
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-
+        settings.setJavaScriptEnabled(true);
+        webView.addJavascriptInterface(new MyJavaScriptInterface(), "HTMLOUT");
+        Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setTitle("Online Payment");
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -85,14 +91,27 @@ public class MuhurtMazaPaymentActivity extends ParentActivity {
         webView.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                showLoadingDialog();
-                //	Log.d("URL=====", url);
-                view.loadUrl(url);
+                	Log.d("URL=====", url);
+                webView.loadUrl(url);
                 return true;
 
             }
 
             public void onPageFinished(WebView view, String url) {
-              dismissLoadingDialog();
+
+                Log.d("URL=====", url);
+                webView.loadUrl("javascript:window.HTMLOUT.showHTML('<head>'+document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+
+                if(url.endsWith("payment_gateway_response/")){
+
+//                    Intent i = new Intent(mContext, ConfirmationActivity.class);
+//                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//
+//                    startActivity(i);
+                }
+
+
+                dismissLoadingDialog();
             }
 
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
@@ -108,6 +127,7 @@ public class MuhurtMazaPaymentActivity extends ParentActivity {
         super.onBackPressed();
 
         Intent intent = new Intent(mContext, MainDrawerActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
@@ -140,7 +160,7 @@ public class MuhurtMazaPaymentActivity extends ParentActivity {
 //			TLS 1.0  & 1.1, 1.2
           dismissLoadingDialog();
             if (!TextUtils.isEmpty(result)) {
-                //	Log.d("WebView", "Result = "+result);
+                Log.d("WebView", "Result = "+result);
                 webView.loadUrl(result);
 
             } else {
@@ -148,6 +168,14 @@ public class MuhurtMazaPaymentActivity extends ParentActivity {
             }
         }
     }
+    class MyJavaScriptInterface {
+        public void showHTML(String html) {
+            String htmlString = html;
+            Log.d("","hrml content:"+html);
+        }
+    }
+
+
 
     /**
      * This function is used to generate URL for the first call to ATOM Gateway

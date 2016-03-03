@@ -75,7 +75,7 @@ public class AppConstants {
     public static String UPDATE_PLAY_SERVICES = "Please update your playservices to use our app";
 
     public static String API_STATUS_FALSE_MESSAGE = "Please try after some time";
-
+    public static String CHECK_Internet ="Please check internet connection";
     public static String PREF_POOJA_BOOK = "pref_pooja_book";
     public static String PREF_POOJA_BOOK_PRICE = "pref_pooja_book_price";
     public static String PREF_POOJA_BOOK_VENU = "pref_pooja_book_venu";

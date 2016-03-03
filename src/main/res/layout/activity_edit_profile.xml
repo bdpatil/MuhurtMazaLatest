@@ -50,7 +50,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="20dp"
-                        android:background="@drawable/ic_usericon"
+                        android:background="@drawable/usergray_profile"
                         app:border_color="@color/colorAccent"
                         app:border_width="2dp" />
 
@@ -158,15 +158,15 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:background="@drawable/ic_action_language" />
-                 <!--   <Spinner
-                        android:id="@+id/et_languageEditProfile"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_weight="9"
-                        android:gravity="center_vertical"
+                    <!--   <Spinner
+                           android:id="@+id/et_languageEditProfile"
+                           android:layout_width="0dp"
+                           android:layout_height="wrap_content"
+                           android:layout_marginLeft="15dp"
+                           android:layout_weight="9"
+                           android:gravity="center_vertical"
 
-                        />-->
+                           />-->
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

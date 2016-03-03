@@ -22,6 +22,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/pooja_image" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:alpha="1.0"
+            android:background="@drawable/gradient_layer" />
 
         <TextView
             android:id="@+id/txtStatus_MyBooking"
@@ -47,24 +54,23 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginRight="20dp"
             android:singleLine="true"
             android:text="Bhagavat Puran Anushthan"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/colorWhite" />
 
-
         <LinearLayout
             android:id="@+id/middle_layout"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/img_pooja_view"
-            android:layout_alignEnd="@+id/img_pooja_view"
-            android:layout_alignRight="@+id/img_pooja_view"
+            android:layout_below="@+id/txtPujaName_MyBooking"
             android:layout_gravity="bottom"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="20dp"
+
             android:orientation="horizontal">
 
             <TextView
@@ -72,62 +78,71 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="Duration: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/txtDuration_MyBooking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:singleLine="true"
+                android:layout_marginLeft="5dp"
                 android:text="3 hrs"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="Guruji: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/txtGuruji_MyBooking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:singleLine="true"
+                android:layout_marginLeft="5dp"
                 android:text="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
+                android:textStyle="italic" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="Dakshina: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/txtDakshina_MyBooking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:singleLine="true"
-                android:text="1000"
+                android:layout_marginLeft="5dp"
+                android:text="1 hr"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
-
+                android:textSize="12sp"
+                android:textStyle="italic" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="Date: "
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/txtPujaDate_MyBooking"
@@ -137,9 +152,11 @@
                 android:singleLine="true"
                 android:text="13 Jan 2016 "
                 android:textColor="@color/colorWhite"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="italic"/>
 
         </LinearLayout>
+
 
     </android.support.v7.widget.CardView>
 

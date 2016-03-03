@@ -42,8 +42,7 @@ public class NewOTPActivity
     Button btnSubmitOTP;
     String strMobileNo;
     android.support.v7.widget.Toolbar mToolbar;
-    private ImageView imgMenu;
-    private TextView txtTitle;
+
 
 
     private Context mContext;
@@ -57,21 +56,7 @@ public class NewOTPActivity
         mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        txtTitle = (TextView) mToolbar.findViewById(R.id.txt_title);
-        imgMenu = (ImageView) mToolbar.findViewById(R.id.img_back);
-        txtTitle.setText("OTP");
-        imgMenu.setBackgroundResource(R.drawable.ic_close);
-        imgMenu.setVisibility(View.VISIBLE);
-        txtTitle.setVisibility(View.VISIBLE);
-        imgMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent nextIntent = new Intent(NewOTPActivity.this, TutorialActivity.class);
-                nextIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(nextIntent);
-                finish();
-            }
-        });
+        mToolbar.setTitle("OTP");
         getOTP();
         btnSubmitOTP.setOnClickListener(this);
         txtResendOTP.setOnClickListener(this);
@@ -86,7 +71,7 @@ public class NewOTPActivity
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("phone", strMobileNo);
-            Log.d("Mobile No", strMobileNo);
+
             ApiHelper lSignUpApi = new ApiHelper(ApiConstants.POST, ApiConstants.GENERATE_OTP, jsonObject.toString(), this);
             lSignUpApi.mApiID = ApiConstants.GENERATE_OTP_ID;
             lSignUpApi.invokeAPI();

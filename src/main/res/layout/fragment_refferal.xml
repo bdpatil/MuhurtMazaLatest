@@ -21,29 +21,41 @@
                 android:id="@+id/lLayout_CircularImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:gravity="bottom"
                 android:orientation="vertical"
                 android:padding="16dp"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+
+
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgUserProfile_ProfileFragment"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:id="@+id/imgUserProfile_ReferralFragment"
+                    android:layout_width="170dp"
+                    android:layout_height="170dp"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/ic_usericon" />
+                    android:background="@drawable/usergray_profile" />
+
+
 
                 <TextView
-                    android:id="@+id/txtUserName_ProfileFragment"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtUserName_ReferralFragment"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtUserName_ProfileFragment"
-                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
                     android:text="@string/user_name"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/txtCityName_ReferralFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="@string/user_city"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 

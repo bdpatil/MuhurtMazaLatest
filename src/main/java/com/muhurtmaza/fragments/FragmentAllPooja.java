@@ -51,6 +51,7 @@ public class FragmentAllPooja extends  ParentFragment implements BaseHttpHelper.
     RecyclerView recyclerView;
     AppPreferences appPreferences;
     String cityname;
+    PoojaBookingListRecyclerViewAdapter mAdapter;
     int color;
     @Nullable
     @Override
@@ -66,7 +67,8 @@ public class FragmentAllPooja extends  ParentFragment implements BaseHttpHelper.
         }
 
         try {
-            getPoojaList();
+            if(BaseHttpHelper.isNwConnected(mContext))
+                 getPoojaList();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -105,20 +107,20 @@ public class FragmentAllPooja extends  ParentFragment implements BaseHttpHelper.
 
 
 
-
-
     @Override
     public void onSuccess(BaseResponse pResponse) {
         dismissLoadingDialog();
+     // previously it was not working so i created new adapter and set it to the viewpager.
 
         PoojaListResponse obj=(PoojaListResponse)pResponse;
 
         List<NewPoojaListModel> rowListItem = obj.getmList();
-
+        if(mAdapter!=null)
+            mAdapter.clear();
         Log.d("Response List", rowListItem.toString());
-        PoojaBookingListRecyclerViewAdapter adapter = new PoojaBookingListRecyclerViewAdapter(getContext(), rowListItem);
-        recyclerView.setAdapter(adapter);
-        MMToast.getInstance().showLongToast("Pooja List", getActivity());
+        mAdapter = new PoojaBookingListRecyclerViewAdapter(getContext(),rowListItem);
+        recyclerView.setAdapter(mAdapter);
+
 
     }
 

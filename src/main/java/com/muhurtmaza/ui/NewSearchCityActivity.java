@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -68,22 +69,11 @@ public class NewSearchCityActivity extends ParentActivity
 
         mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        mToolbar.setTitle("Update Profile");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        txtTitle = (TextView) mToolbar.findViewById(R.id.txt_title);
-        imgMenu = (ImageView) mToolbar.findViewById(R.id.img_back);
-        txtTitle.setText("Select your city");
-        txtTitle.setGravity(Gravity.START);
-        imgMenu.setBackgroundResource(R.drawable.ic_white_arrow);
-        txtTitle.setVisibility(View.VISIBLE);
-        imgMenu.setVisibility(View.VISIBLE);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setTitle("Select Your City");
 
-        imgMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, MainDrawerActivity.class);
-                startActivity(intent);
-            }
-        });
 
         layoutManager = new LinearLayoutManager(mContext);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_all_city);
@@ -93,6 +83,17 @@ public class NewSearchCityActivity extends ParentActivity
         recyclerView.setAdapter(adapter);*/
 
         getCityList();
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 
@@ -146,18 +147,21 @@ public class NewSearchCityActivity extends ParentActivity
     @Override
     public void onFail(BaseResponse pBaseResponse) {
         dismissLoadingDialog();
-        MMToast.getInstance().showShortToast("Fail", mContext);
+        MMToast.getInstance().showShortToast(AppConstants.CHECK_Internet, mContext);
     }
 
     private void getCityList() {
-        showLoadingDialog();
+
         citylist = new ArrayList<String>();
-        try {
-            ApiHelper lGetCityApi = new ApiHelper(ApiConstants.POST, ApiConstants.GET_CITY_NAMES, "", NewSearchCityActivity.this);
-            lGetCityApi.mApiID = ApiConstants.GET_CITY_NAMES_ID;
-            lGetCityApi.invokeAPI();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(BaseHttpHelper.isNwConnected(mContext)) {
+            showLoadingDialog();
+            try {
+                ApiHelper lGetCityApi = new ApiHelper(ApiConstants.POST, ApiConstants.GET_CITY_NAMES, "", NewSearchCityActivity.this);
+                lGetCityApi.mApiID = ApiConstants.GET_CITY_NAMES_ID;
+                lGetCityApi.invokeAPI();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

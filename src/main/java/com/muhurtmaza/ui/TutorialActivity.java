@@ -13,6 +13,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.muhurtmaza.R;
+import com.muhurtmaza.model.User;
 import com.muhurtmaza.tutorial.CirclePageIndicator;
 import com.muhurtmaza.tutorial.PlaceSlidesFragmentAdapter;
 
@@ -94,6 +95,8 @@ public class TutorialActivity extends ParentActivity {
         btnSkipTutorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                User user = User.getInstance();
+                user.clear();
                 Intent intent = new Intent(TutorialActivity.this, MainDrawerActivity.class);
                 startActivity(intent);
                 finish();

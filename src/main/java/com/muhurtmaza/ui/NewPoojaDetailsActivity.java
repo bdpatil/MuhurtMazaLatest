@@ -8,11 +8,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.muhurtmaza.R;
+import com.muhurtmaza.model.BookingDetails;
 import com.muhurtmaza.model.NewPoojaDetailModel;
+import com.muhurtmaza.model.User;
 import com.muhurtmaza.utility.AppConstants;
 import com.muhurtmaza.webservice.ApiConstants;
 import com.muhurtmaza.webservice.ApiHelper;
@@ -25,12 +28,16 @@ import com.muhurtmaza.webservice.response.PoojaDetailsResponse;
 import com.muhurtmaza.widget.MMToast;
 
 import android.support.v7.widget.AppCompatButton;
+
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import android.widget.TextView;;import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,11 +60,16 @@ public class NewPoojaDetailsActivity extends ParentActivity implements  View.OnC
     private Context mContext;
     Bundle bundle;
     NewPoojaDetailModel rowListItem;
+    User user;
+    BookingDetails details;
+    private ShareActionProvider mShareActionProvider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_pooja_details);
         //initialization
+        details =BookingDetails.getInstance();
+
         poojaPrice = (TextView)findViewById(R.id.txt_new_dakashina);
         poojaDuration = (TextView)findViewById(R.id.txt_new_puja_duration);
         noOfGuruji= (TextView)findViewById(R.id.txt_new_guruji_no);
@@ -81,6 +93,7 @@ public class NewPoojaDetailsActivity extends ParentActivity implements  View.OnC
         //get data from previous activity
         Bundle bundle = getIntent().getExtras();
         poojaId = bundle.getString(POOJA_ID);
+        details.setBookingId(poojaId);
         poojaCity =bundle.getString(POOJA_CITY);
 
         setSupportActionBar(toolbar);
@@ -99,7 +112,8 @@ public class NewPoojaDetailsActivity extends ParentActivity implements  View.OnC
 
         //Book
         bookPoojaBtn.setOnClickListener(this);
-
+        user = User.getInstance();
+        //System.out.println("User Name : "+user.getUsername());
 
     }
 
@@ -107,6 +121,14 @@ public class NewPoojaDetailsActivity extends ParentActivity implements  View.OnC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_pooja_details, menu);
+        MenuItem item = menu.findItem(R.id.action_share);
+        if (item != null) {
+            mShareActionProvider
+                    = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        }
+
+
+
         return true;
     }
 
@@ -117,13 +139,20 @@ public class NewPoojaDetailsActivity extends ParentActivity implements  View.OnC
     @Override
     public void onClick(View v) {
         if (v==bookPoojaBtn){
-            Intent i = new Intent(mContext, NewActivityPoojaBookingDetails.class);
-            Bundle bundle = new Bundle();
-            bundle.putString(POOJA_ID, poojaId);
-            bundle.putString(POOJA_CITY, poojaCity);
-            i.putExtra("poojaDetails", rowListItem);
-            i.putExtras(bundle);
-            v.getContext().startActivity(i);
+            if(user.getUserid()!=null) {
+                Intent i = new Intent(mContext, NewActivityPoojaBookingDetails.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(POOJA_ID, poojaId);
+                bundle.putString(POOJA_CITY, poojaCity);
+                i.putExtra("poojaDetails", rowListItem);
+                i.putExtras(bundle);
+                v.getContext().startActivity(i);
+            }
+            else {
+                Intent i = new Intent(mContext, NewLoginActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                v.getContext().startActivity(i);
+            }
         }
 
     }
@@ -177,6 +206,8 @@ public class NewPoojaDetailsActivity extends ParentActivity implements  View.OnC
             poojaNotes.setText(rowListItem.getmPoojaTerms());
             poojaBlessing.setText(rowListItem.getmPoojaBlessings());
 
+            details.setPoojaName(rowListItem.getmPooja_Name());
+
             Glide.with(mContext)
                     .load(rowListItem.getmPooja_Image_URL())
                     .centerCrop()
@@ -184,6 +215,7 @@ public class NewPoojaDetailsActivity extends ParentActivity implements  View.OnC
                     .crossFade()
                     .into(poojaImage);
             displayRating(rowListItem.getmRating());
+            setShareIntent();
 
         }
 
@@ -279,6 +311,26 @@ public class NewPoojaDetailsActivity extends ParentActivity implements  View.OnC
         super.onDestroy();
         System.gc();
 
+    }
+
+    /**
+     * share action
+     */
+    // Call to update the share intent
+    private void setShareIntent() {
+        if (mShareActionProvider != null) {
+            // create an Intent with the contents of the TextView
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/html");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT,
+                    "Pooja Recommendation from Muhurtmaza");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml("<img src="+rowListItem.getmPooja_Image_URL()+" alt="+rowListItem.getmPooja_Name()+"><br>"+
+            "\n<b>"+rowListItem.getmPooja_Name()+"</b><br>"+
+            "\n<p>"+rowListItem.getmPoojaDescription()+"</p><br>\n"+
+            "\n<b>No of Guruji:</b> "+rowListItem.getmNo_Of_Guruji()+"\t <b>Duration: </b>" + getFormatedTime(rowListItem.getmPooja_Duration())));
+
+            mShareActionProvider.setShareIntent(shareIntent);
+        }
     }
 }
 

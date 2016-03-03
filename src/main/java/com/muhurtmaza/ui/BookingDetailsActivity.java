@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.muhurtmaza.R;
 import com.muhurtmaza.utility.AppConstants;
+import com.muhurtmaza.utility.AppPreferences;
 import com.muhurtmaza.webservice.ApiConstants;
 import com.muhurtmaza.webservice.ApiHelper;
 import com.muhurtmaza.webservice.BaseHttpHelper;
@@ -37,11 +39,12 @@ public class BookingDetailsActivity extends ParentActivity implements View.OnCli
     android.support.v7.widget.Toolbar mToolbar;
     private Context context;
     int selectedOption = 0; //invite friends =1,report issue=2
-
+    AppPreferences appPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
+        appPreferences = AppPreferences.getInstance(this);
         setContentView(R.layout.activity_booking_details);
         setupUI();
         Intent intent = getIntent();
@@ -56,17 +59,19 @@ public class BookingDetailsActivity extends ParentActivity implements View.OnCli
         mToolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        txtTitle = (TextView) mToolbar.findViewById(R.id.txt_title);
-        imgMenu = (ImageView) mToolbar.findViewById(R.id.img_back);
-        txtTitle.setText("Book Pooja Details");
-        imgMenu.setVisibility(View.VISIBLE);
-        txtTitle.setVisibility(View.VISIBLE);
-        imgMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setTitle("Booking Details");
+//        txtTitle = (TextView) mToolbar.findViewById(R.id.txt_title);
+//        imgMenu = (ImageView) mToolbar.findViewById(R.id.img_back);
+//        txtTitle.setText("Book Pooja Details");
+//        imgMenu.setVisibility(View.VISIBLE);
+//        txtTitle.setVisibility(View.VISIBLE);
+//        imgMenu.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onBackPressed();
+//            }
+//        });
         imgProfile_Details = (ImageView) findViewById(R.id.img_profileBookingDetails);
         txtCode_Details = (TextView) findViewById(R.id.txt_codeBookingDetails);
         txtStatus_Details = (TextView) findViewById(R.id.txt_statusBookingDetails);
@@ -94,7 +99,7 @@ public class BookingDetailsActivity extends ParentActivity implements View.OnCli
         try {
             showLoadingDialog();
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("booking_id", "40"); //bookingId
+            jsonObject.put("booking_id", appPreferences.getString(AppConstants.POOJA_BOOKING_ID,"")); //bookingId
             ApiHelper lApi = new ApiHelper(ApiConstants.POST, ApiConstants.POOJA_BOOKINGS_DETAILS, jsonObject.toString(), this);
             lApi.mApiID = ApiConstants.POOJA_BOOKINGS_DETAILS_ID;
             lApi.invokeAPI();
@@ -165,8 +170,19 @@ public class BookingDetailsActivity extends ParentActivity implements View.OnCli
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        imgMenu.setVisibility(View.INVISIBLE);
-        txtTitle.setVisibility(View.INVISIBLE);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; goto parent activity.
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Defines the menu item that will appear on the Action Bar in MainActivity -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:omgandroid="http://schemas.android.com/apk/res-auto">
+    <!-- Share item -->
+    <item
+        android:id="@+id/action_edit"
+        android:title="Edit"
+        android:icon="@drawable/ic_edit"
+        omgandroid:showAsAction="ifRoom"
+         />
+</menu>

@@ -1,9 +1,14 @@
 package com.muhurtmaza.webservice;
 
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.muhurtmaza.utility.AppConstants;
 import com.muhurtmaza.webservice.response.BookingDetailsResponse;
 import com.muhurtmaza.webservice.response.CheckOTPResponse;
 import com.muhurtmaza.webservice.response.EditProfileResponse;
@@ -192,12 +197,12 @@ public abstract class BaseHttpHelper extends AsyncTask<Void, Void, BaseResponse>
                 break;
 
             case ApiConstants.EMAIL_ALERT_ACTIVATION_ID:
-                lBaseResponse = BaseResponse.fromJson(pResponse);
+                lBaseResponse = CheckOTPResponse.fromJson(pResponse);
                 lBaseResponse.setmAPIType(ApiConstants.EMAIL_ALERT_ACTIVATION_ID);
                 break;
 
             case ApiConstants.SMS_ALERT_ACTIVATION_ID:
-                lBaseResponse = BaseResponse.fromJson(pResponse);
+                lBaseResponse = CheckOTPResponse.fromJson(pResponse);
                 lBaseResponse.setmAPIType(ApiConstants.SMS_ALERT_ACTIVATION_ID);
                 break;
 
@@ -262,4 +267,18 @@ public abstract class BaseHttpHelper extends AsyncTask<Void, Void, BaseResponse>
 
 
     }
+    public static boolean isNwConnected(Context context) {
+        if (context == null) {
+            return true;
+        }
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo nwInfo = connectivityManager.getActiveNetworkInfo();
+        if (nwInfo != null && nwInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        Toast.makeText(context, AppConstants.CHECK_Internet, Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
 }

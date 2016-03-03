@@ -49,11 +49,12 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListHolder> {
             @Override
             public void onClick(View v) {
                 //GetCityModel model=itemList.get(position);
-                MMToast.getInstance().showLongToast("You click" + itemList.get(position).getmCityName(), context);
+                MMToast.getInstance().showLongToast("City has been changed to " + itemList.get(position).getmCityName(), context);
                 cityName = itemList.get(position).getmCityName();
                 AppPreferences appPreferences = AppPreferences.getInstance(context);
                 appPreferences.putString(AppConstants.CITY_NAME_ADAPTER, cityName);
                 Intent intent = new Intent(context, MainDrawerActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 context.startActivity(intent);
             }
         });

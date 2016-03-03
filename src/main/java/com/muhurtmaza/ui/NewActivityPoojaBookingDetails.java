@@ -36,7 +36,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.muhurtmaza.R;
 
+import com.muhurtmaza.model.BookingDetails;
 import com.muhurtmaza.model.NewPoojaDetailModel;
+import com.muhurtmaza.model.User;
 import com.muhurtmaza.utility.AppConstants;
 import com.muhurtmaza.utility.AppPreferences;
 import com.muhurtmaza.utility.CommonUtility;
@@ -65,31 +67,33 @@ public class NewActivityPoojaBookingDetails extends ParentActivity implements Vi
     private EditText edtfname_BookingDetails, edtlname_BookingDetails,
             edtemail_BookingDetails, edtmobileno_BookingDetails, edtaddress_BookingDetails, edtcity_BookingDetails;
     private Spinner edtlanguage_BookingDetails;
-    android.support.v7.widget.Toolbar mToolbar;
 
+    BookingDetails details;
     private FontFitTextView btnDateDay,txtDay,dateButton,txtMonth;
     private String TAG = getClass().getSimpleName();
     private AppPreferences appPreferences;
     private CardView muhurtDateView;
     private RadioGroup radioMuhurtGroup;
-
+    User user;
     private String muhurtDateSelected,samagreeSelected,withSamagreePrice,withoutSamagreePrice,poojaId,poojaCity,dakshina,samagreeStatus;
     NewPoojaDetailModel poojaDetailModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pooja_booking_details);
-        context = this;
-
-
-        setupUI();
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_pooja_booking_details);
+            context = this;
+            user =User.getInstance();
+            details =BookingDetails.getInstance();
+            setupUI();
     }
 
     private void setupUI() {
-        mToolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.anim_toolbar);
-        setSupportActionBar(mToolbar);
-        mToolbar.setTitle("Booking Details");
+        Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("Booking Details");
+
 
 
         appPreferences = AppPreferences.getInstance(this);
@@ -115,7 +119,7 @@ public class NewActivityPoojaBookingDetails extends ParentActivity implements Vi
         btnDateDay =(FontFitTextView)findViewById(R.id.txt_date_day);
         muhurtDateView =(CardView)findViewById(R.id.muhurt_date_view);
 
-        samagreeSelected = WITH_SAMAGREE;
+        samagreeSelected = WITHOUT_SAMAGREE;
         radioMuhurtGroup=(RadioGroup)findViewById(R.id.radGroup);
 
         Bundle bundle = getIntent().getExtras();
@@ -127,7 +131,7 @@ public class NewActivityPoojaBookingDetails extends ParentActivity implements Vi
         System.out.println("Pooja Details "+poojaDetailModel.getmPooja_Name());
         dakshina =poojaDetailModel.getmDakshina_without_samagree();
         samagreeStatus="NO";
-
+        user.setUserBookedPoojaName(poojaDetailModel.getmPooja_Name());
         muhurtDateView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,7 +192,7 @@ public class NewActivityPoojaBookingDetails extends ParentActivity implements Vi
         dateButton.setText("" + getFormatedDate(calendar.get(Calendar.DAY_OF_MONTH)));
         txtMonth.setText("" + new SimpleDateFormat("MMMM").format(tomorrow));
         txtDay.setText("" + new SimpleDateFormat("EEEE").format(tomorrow));
-        btnDateDay.setText("Tommorrow");
+        btnDateDay.setText("Tomorrow");
         muhurtDateSelected = new SimpleDateFormat("dd MMMM yyyy").format(tomorrow).toString();
         review.setOnClickListener(this);
     }
@@ -329,6 +333,12 @@ public class NewActivityPoojaBookingDetails extends ParentActivity implements Vi
             editor.putString("PoojaCity",poojaCity);
             editor.putString("SamagreeStatus",samagreeStatus);
             editor.commit();
+
+            details.setUser_email_id(strEmail);
+            details.setMuhurt_date(strMuhurtdate);
+            details.setDakshina(dakshina);
+            details.setSamagree_chossen(samagreeStatus);
+
             Toast.makeText(getApplicationContext(),"Successful...!",Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(this, NewPoojaBookingReviewDetailsActivity.class);

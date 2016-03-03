@@ -9,6 +9,7 @@ import android.text.TextUtils;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.muhurtmaza.R;
+import com.muhurtmaza.model.User;
 import com.muhurtmaza.utility.AppConstants;
 import com.muhurtmaza.utility.AppPreferences;
 import com.muhurtmaza.utility.LocationManager;
@@ -36,6 +37,7 @@ public class SplashScreen extends ParentActivity implements BaseHttpHelper.Respo
         String userID = muhurtMazaPreferences.getString(AppConstants.USER_ID, "").trim();
 
         if (!TextUtils.isEmpty(userID) && !userID.equals("null") && !userID.equals("") && userID != null) {
+            initUser();
             isLogin = true;
             getFeedback();
             callNextScreen();
@@ -47,11 +49,13 @@ public class SplashScreen extends ParentActivity implements BaseHttpHelper.Respo
 
     private void callNextScreen() {
         if (isLogin) {
+
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
 
                 @Override
                 public void run() {
+
                     Intent intent = new Intent(SplashScreen.this, MainDrawerActivity.class);
                     startActivity(intent);
                     finish();
@@ -140,5 +144,21 @@ public class SplashScreen extends ParentActivity implements BaseHttpHelper.Respo
                 });
 
         locationManager.fetchLocation();
+    }
+
+    private void initUser(){
+        User user= User.getInstance();
+        user.setUserid(muhurtMazaPreferences.getString(AppConstants.USER_ID, "").trim());
+        user.setUserFirstname(muhurtMazaPreferences.getString(AppConstants.USER_FNAME, "").trim());
+        user.setUserLastname(muhurtMazaPreferences.getString(AppConstants.USER_LNAME, "").trim());
+        user.setUserEmailId(muhurtMazaPreferences.getString(AppConstants.USER_EMAIL, "").trim());
+        user.setUserContactNo(muhurtMazaPreferences.getString(AppConstants.USER_NUMBER, "").trim());
+        user.setUserLanguage(muhurtMazaPreferences.getString(AppConstants.USER_LANGUAGE, "").trim());
+        user.setUserAddress(muhurtMazaPreferences.getString(AppConstants.USER_ADDRESS, "").trim());
+        user.setUserProfilePicURL(muhurtMazaPreferences.getString(AppConstants.USER_PROFILE, "").trim());
+        user.setUserEmailAlert(muhurtMazaPreferences.getString(AppConstants.EMAIL_ALERT, "").trim());
+        user.setUserSMSAlert(muhurtMazaPreferences.getString(AppConstants.SMS_ALERT, "").trim());
+        user.setUserCity(muhurtMazaPreferences.getString(AppConstants.USER_CITY, "").trim());
+
     }
 }

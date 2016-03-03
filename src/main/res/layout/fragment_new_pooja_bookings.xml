@@ -17,10 +17,20 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabanim_tabs"
 
+            app:layout_scrollFlags="scroll|enterAlways|snap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/search_view"
+        android:theme="@style/EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:iconifiedByDefault="false"
+        android:background="#fff"
+        app:defaultQueryHint="Search Puja"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/new_pooja_bookings_viewpager"

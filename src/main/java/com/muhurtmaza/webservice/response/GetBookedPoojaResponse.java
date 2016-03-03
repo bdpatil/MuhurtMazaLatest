@@ -26,6 +26,7 @@ public class GetBookedPoojaResponse extends BaseResponse{
 
     public static GetBookedPoojaResponse fromJson(String pResult)   {
         try {
+
             Gson gson = new Gson();
             return gson.fromJson(pResult.toString(), GetBookedPoojaResponse.class);
         } catch (Exception e) {
